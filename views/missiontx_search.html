@@ -1,0 +1,80 @@
+<!Doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <script type="text/javascript" src="/js/coinstack-1.1.19.min.js"></script> -->
+    <script src="https://code.jquery.com/jquery-latest.js "></script>
+    <!-- <script src="jquery-1.7.1.js" type="text/javascript"></script>  -->
+    <!-- bootsrtap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+    <script type="text/javascript" src="./lib/bignumber.min.js"></script>
+    <script type="text/javascript" src="./lib/web3-light.js"></script>
+    <script type="text/javascript">
+         console.log('starting...');
+        //connect web3 and check if web3 is connected correctly
+        if (typeof web3 !== 'undefined') {
+            web3 = new Web3(web3.currentProvider);
+        } else {
+            // set the provider you want from Web3.providers
+            web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+        }
+
+        if (web3.isConnected()) {
+            console.log("connected");
+        } else {
+            console.log("not connected")
+        }
+
+
+        function gettransaction() {
+            var transactioninfo =  document.getElementById('missiontx_search').value;
+            console.log("transactioninfo : " + transactioninfo);
+
+            web3.eth.getTransaction(transactioninfo, function(error, traninfo) {
+                 if (!error) {
+                    document.getElementById("blockHash").innerText = traninfo.blockHash;
+                    document.getElementById('from').innerText = traninfo.from;
+                    document.getElementById('nonce').innerText = traninfo.nonce;
+                    document.getElementById('gas').innerText = traninfo.gas;
+                    document.getElementById('gasPrice').innerText = traninfo.gasPrice;
+                    document.getElementById('hash').innerText = traninfo.hash;
+
+                     console.log(traninfo); 
+                     console.log("blockHash : " + traninfo.blockHash);
+                     console.log("blockNumber : " + traninfo.blockNumber);
+                     console.log("from : " + traninfo.from);
+                     console.log("gas : " + traninfo.gas);
+                     console.log("gasPrice : " + traninfo.gasPrice);
+                     console.log("hash : " + traninfo.hash);
+
+                     console.log("input : " + traninfo.input);
+                     console.log("nonce : " + traninfo.nonce);
+                     console.log("r : " + traninfo.r);
+                     console.log("s : " + traninfo.s);
+                     console.log("v : " + traninfo.v);
+
+                     console.log("to : " + traninfo.to);
+                     console.log("transactionIndex : " + traninfo.transactionIndex);
+                     console.log("value : " + traninfo.value);
+                 }
+                 else {
+                    //res = error; 
+                    console.log(error); 
+                 }
+                 
+            });
+        }
+
+    </script>
+</head>
+
+
+<body>
+    <input type="text" id="missiontx_search" placeholder="미션 트랜잭션 주소 검색"> <button id="transaction_search" onclick="gettransaction()">미션 트랜잭션 검색</button>
+
+</body>
+
+</html>
