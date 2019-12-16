@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+    <center>
+  <head>
+    <title>PROMISSION♥/MY PAGE</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="http://code.jquery.com/jquery-latest.js "></script>
+    <script type="text/javascript" src="../router/qrcode.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"
+    />
+    <script>
+      $(document).ready(function() {
+        let DEBUG = 1
+
+        let qrcode = new QRCode(document.getElementById('qrcode'), {
+          width: 250,
+          height: 250,
+        })
+
+        function makeCode() {
+          let elText = document.getElementById('fromaddress')
+
+          if (!elText.value) {
+            alert('Input a text')
+            elText.focus()
+            return
+          }
+          qrcode.makeCode(elText.value)
+        }
+
+        $('#qrcodeBtn').on('click', function() {
+          if (DEBUG) console.log('qrcodeBtn...... ')
+          makeCode()
+        }) // end of txbuilder
+      })
+    </script>
+    <style>
+        body {text-align: center;}
+      button {
+        background-color: white;
+      }
+      button.a {
+        background-color: cornflowerblue;
+      }
+      button.b {
+        background-color: black;
+        color: white;
+      }
+      button.c {
+        background-color: dodgerblue;
+      }
+    </style>
+  </head>
+
+  <body style="background-color:rgb(194, 241, 255);">
+    <h1
+      style="text-align: center; font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;"
+    >
+      PROMISSION
+    </h1>
+    <div>
+      <img
+        src="../public/img/person.jpg"
+        style="width: 50px; height: 50px; float: left;"
+      />
+      <h5 id="id" style="float: left;">
+        User ID
+      </h5>
+    </div>
+    <div style="float: right;">
+      <button style="height: 30px; width: 80px;" class="a">로그아웃</button>
+    </div>
+    <br /><br /><br />
+    
+      <button style="height: 40px; width: 110px;">ABOUT</button>
+      <button style="height: 40px; width: 110px;">
+        미션지 검색
+      </button>
+      <button style="height: 40px; width: 110px;">
+        미션 결과
+      </button>
+      <button style="height: 40px; width: 110px;">
+        블록 정보
+      </button>
+      <button style="height: 40px; width: 110px; background-color: darkgray;">
+        MY PAGE
+      </button>
+      <br /><br />
+      <button id="qrcodeBtn" style="background-color: skyblue;">Create QRCode</button>
+      <div
+        id="qrcode"
+        style="width:250px; height:250px;"
+      ></div>
+      <br />
+      <input style="width: 250px;" value="본인 전자지갑 주소" id="fromaddress"></input> </h5>
+      <button id="btn1" class="b">복사</button><br /><br />
+      <input style="width: 250px;" value="미션 신청서 생성 링크" />
+      <button id="btn2" class="b">복사</button><br /><br />
+      <button id="btn2" class="c" style="width: 100PX; height: 30px;">
+        <b>미션 리스트</b>
+      </button>
+    
+  </body>
+</center>
+</html>
