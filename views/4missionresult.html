@@ -87,6 +87,28 @@
           border: 1px solid;
         }
       </style>
+      <script>
+        var mysql = require('mysql')
+
+        var con = mysql.createConnection({
+          host: 'localhost',
+          user: 'yourusername',
+          password: 'yourpassword',
+          database: 'mydb',
+        })
+
+        con.connect(function(err) {
+          if (err) throw err
+          con.query('SELECT name, address FROM customers', function(
+            err,
+            result,
+            fields
+          ) {
+            if (err) throw err
+            console.log(result)
+          })
+        })
+      </script>
     </head>
 
     <body>
@@ -123,14 +145,16 @@
       <button class="b">MY PAGE</button><br /><br />
       <h3>미션 결과</h3>
       <br />
+      <input type="text" id="mission_search" placeholder="BJ 닉네임 검색" />
+      <button id="nick_search">닉네임 검색</button><br /><br />
       <table class="a">
         <tr>
-          <th style="width: 50px;">No.</th>
-          <th style="width: 100px;">시청자</th>
-          <th style="width: 100px;">미션 결과</th>
-          <th>미션 해시값</th>
+          <th>닉네임</th>
+          <th>미션 수락 여부 시간</th>
+          <th>미션 수락 여부</th>
           <th>미션 시작 시간</th>
           <th>미션 종료 시간</th>
+          <th>미션 결과</th>
         </tr>
       </table>
     </body>
