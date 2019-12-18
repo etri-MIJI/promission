@@ -2,7 +2,7 @@
 <html>
   <center>
     <head>
-      <title>PROMISSION♥/ABOUT</title>
+      <title>PROMISSION♥/미션 결과</title>
       <meta charset="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <!-- <script type="text/javascript" src="/js/coinstack-1.1.19.min.js"></script> -->
@@ -59,10 +59,56 @@
           color: white;
           width: 200px;
         }
+        button.e {
+          background-color: black;
+          color: white;
+        }
+        button.f {
+          width: 100px;
+          height: 30px;
+        }
         input.a {
           width: 250px;
         }
+        table {
+          border: 1px solid;
+          padding: 8px;
+          width: 500px;
+        }
+        table.a {
+          border: 1px solid;
+          padding: 8px;
+          width: 800px;
+        }
+        th,
+        td {
+          padding: 8px;
+          text-align: center;
+          border: 1px solid;
+        }
       </style>
+      <script>
+        var mysql = require('mysql')
+
+        var con = mysql.createConnection({
+          host: 'localhost',
+          user: 'yourusername',
+          password: 'yourpassword',
+          database: 'mydb',
+        })
+
+        con.connect(function(err) {
+          if (err) throw err
+          con.query('SELECT name, address FROM customers', function(
+            err,
+            result,
+            fields
+          ) {
+            if (err) throw err
+            console.log(result)
+          })
+        })
+      </script>
     </head>
 
     <body>
@@ -85,23 +131,32 @@
         <button class="a">회원가입</button>
       </div>
       <br /><br /><br />
-      <div>
-        <button class="c">ABOUT</button>
-        <button class="b">
-          미션지 검색
-        </button>
-        <button class="b">
-          미션 결과
-        </button>
-        <button class="b">
-          블록 정보
-        </button>
-        <button class="b">MY PAGE</button>
-      </div>
-      <br /><br /><br />
-      <p style="background-color: white;font-size: larger;">ABOUT PROMISSION</p>
+
+      <button class="b">ABOUT</button>
+      <button class="b">
+        미션지 검색
+      </button>
+      <button class="c">
+        미션 결과
+      </button>
+      <button class="b">
+        블록 정보
+      </button>
+      <button class="b">MY PAGE</button><br /><br />
+      <h3>미션 결과</h3>
       <br />
-      <h3>PRIMISSION이 하는 일?</h3>
+      <input type="text" id="mission_search" placeholder="BJ 닉네임 검색" />
+      <button id="nick_search">닉네임 검색</button><br /><br />
+      <table class="a">
+        <tr>
+          <th>닉네임</th>
+          <th>미션 수락 여부 시간</th>
+          <th>미션 수락 여부</th>
+          <th>미션 시작 시간</th>
+          <th>미션 종료 시간</th>
+          <th>미션 결과</th>
+        </tr>
+      </table>
     </body>
   </center>
 </html>
