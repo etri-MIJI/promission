@@ -37,23 +37,20 @@ $(document).ready(function() {
           let crypto_password = SHA1(password);
           if (DEBUG) console.log(crypto_password);
 
-          //   //DB에 post
-          //   $.post(
-          //     '/user/register',
-          //     {
-          //       user_id: id,
-          //       nickname: nick,
-          //       password: crypto_password,
-          //       wallet_address: account,
-          //       email: email,
-          //     },
-          //     function(data) {
-          //       console.log('register_button : ', data);
-          //     }
-          //   ); // end of post
-
-          //DB에 GET
-          $.get('/register-page', function(data) {}); //end of get
+          //DB에 post
+          $.post(
+            '/user/register',
+            {
+              user_id: id,
+              nickname: nick,
+              password: crypto_password,
+              wallet_address: account,
+              email: email,
+            },
+            function(data) {
+              console.log('register_button : ', data);
+            }
+          ); // end of post
         } //end of if
       } //end of |||||||
     } //end of email check
