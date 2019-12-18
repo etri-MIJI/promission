@@ -1,170 +1,154 @@
 <!DOCTYPE html>
 <html>
-  <center>
-    <head>
-      <title>PROMISSION♥/블록 정보</title>
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1" />
-      <!-- <script type="text/javascript" src="/js/coinstack-1.1.19.min.js"></script> -->
-      <script src="https://code.jquery.com/jquery-latest.js "></script>
-      <!-- <script src="jquery-1.7.1.js" type="text/javascript"></script>  -->
-      <!-- bootsrtap CSS -->
-      <link
-        rel="stylesheet"
-        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"
-      />
+  <head>
+    <title>PROMISSION♥/블록 정보</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://code.jquery.com/jquery-latest.js "></script>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"
+    />
 
-      <script type="text/javascript" src="./lib/bignumber.min.js"></script>
-      <script type="text/javascript" src="./lib/web3-light.js"></script>
+    <script type="text/javascript" src="/js/bignumber.min.js"></script>
+    <script type="text/javascript" src="/js/web3-light.js"></script>
 
-      <style>
-        body {
-          text-align: center;
-          background-color: rgb(194, 241, 255);
-        }
+    <style>
+      body {
+        text-align: center;
+        background-color: rgb(194, 241, 255);
+      }
 
-        h1 {
-          font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-        }
+      h1 {
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+      }
 
-        h3 {
-          font-family: monospace;
-        }
+      h3 {
+        font-family: monospace;
+      }
 
-        button {
-          background-color: white;
-        }
+      button {
+        background-color: white;
+      }
 
-        button.a {
-          height: 30px;
-          width: 80px;
-          float: right;
-          background-color: cornflowerblue;
-        }
+      button.a {
+        height: 30px;
+        width: 80px;
+        float: right;
+        background-color: cornflowerblue;
+      }
 
-        button.b {
-          height: 40px;
-          width: 110px;
-          background-color: white;
-        }
+      button.b {
+        height: 40px;
+        width: 110px;
+        background-color: white;
+      }
 
-        button.c {
-          height: 40px;
-          width: 110px;
-          background-color: darkgray;
-        }
+      button.c {
+        height: 40px;
+        width: 110px;
+        background-color: darkgray;
+      }
 
-        button.d {
-          background-color: black;
-          color: white;
-          width: 200px;
-        }
-        input.a {
-          width: 250px;
-        }
-      </style>
+      button.d {
+        background-color: black;
+        color: white;
+        width: 200px;
+      }
+      input.a {
+        width: 250px;
+      }
+    </style>
 
-      <script type="text/javascript">
-        console.log('starting...')
-        //connect web3 and check if web3 is connected correctly
-        if (typeof web3 !== 'undefined') {
-          web3 = new Web3(web3.currentProvider)
-        } else {
-          // set the provider you want from Web3.providers
-          web3 = new Web3(
-            new Web3.providers.HttpProvider('http://localhost:8545')
-          )
-        }
+    <script type="text/javascript">
+      console.log('starting...');
+      //connect web3 and check if web3 is connected correctly
+      if (typeof web3 !== 'undefined') {
+        web3 = new Web3(web3.currentProvider);
+      } else {
+        // set the provider you want from Web3.providers
+        web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'));
+      }
 
-        if (web3.isConnected()) {
-          console.log('connected')
-        } else {
-          console.log('not connected')
-        }
+      if (web3.isConnected()) {
+        console.log('connected');
+      } else {
+        console.log('not connected');
+      }
 
-        function gettransaction() {
-          var transactioninfo = document.getElementById('missiontx_search')
-            .value
-          console.log('transactioninfo : ' + transactioninfo)
+      function gettransaction() {
+        var transactioninfo = document.getElementById('missiontx_search').value;
+        console.log('transactioninfo : ' + transactioninfo);
 
-          web3.eth.getTransaction(transactioninfo, function(error, traninfo) {
-            if (!error) {
-              document.getElementById('blockHash').innerText =
-                traninfo.blockHash
-              document.getElementById('from').innerText = traninfo.from
-              document.getElementById('nonce').innerText = traninfo.nonce
-              document.getElementById('gas').innerText = traninfo.gas
-              document.getElementById('gasPrice').innerText = traninfo.gasPrice
-              document.getElementById('hash').innerText = traninfo.hash
+        web3.eth.getTransaction(transactioninfo, function(error, traninfo) {
+          if (!error) {
+            document.getElementById('blockHash').innerText = traninfo.blockHash;
+            document.getElementById('from').innerText = traninfo.from;
+            document.getElementById('nonce').innerText = traninfo.nonce;
+            document.getElementById('gas').innerText = traninfo.gas;
+            document.getElementById('gasPrice').innerText = traninfo.gasPrice;
+            document.getElementById('hash').innerText = traninfo.hash;
 
-              console.log(traninfo)
-              console.log('blockHash : ' + traninfo.blockHash)
-              console.log('blockNumber : ' + traninfo.blockNumber)
-              console.log('from : ' + traninfo.from)
-              console.log('gas : ' + traninfo.gas)
-              console.log('gasPrice : ' + traninfo.gasPrice)
-              console.log('hash : ' + traninfo.hash)
+            console.log(traninfo);
+            console.log('blockHash : ' + traninfo.blockHash);
+            console.log('blockNumber : ' + traninfo.blockNumber);
+            console.log('from : ' + traninfo.from);
+            console.log('gas : ' + traninfo.gas);
+            console.log('gasPrice : ' + traninfo.gasPrice);
+            console.log('hash : ' + traninfo.hash);
 
-              console.log('input : ' + traninfo.input)
-              console.log('nonce : ' + traninfo.nonce)
-              console.log('r : ' + traninfo.r)
-              console.log('s : ' + traninfo.s)
-              console.log('v : ' + traninfo.v)
+            console.log('input : ' + traninfo.input);
+            console.log('nonce : ' + traninfo.nonce);
+            console.log('r : ' + traninfo.r);
+            console.log('s : ' + traninfo.s);
+            console.log('v : ' + traninfo.v);
 
-              console.log('to : ' + traninfo.to)
-              console.log('transactionIndex : ' + traninfo.transactionIndex)
-              console.log('value : ' + traninfo.value)
-            } else {
-              //res = error;
-              console.log(error)
-            }
-          })
-        }
-      </script>
-    </head>
+            console.log('to : ' + traninfo.to);
+            console.log('transactionIndex : ' + traninfo.transactionIndex);
+            console.log('value : ' + traninfo.value);
+          } else {
+            //res = error;
+            console.log(error);
+          }
+        });
+      }
+    </script>
+  </head>
 
-    <body>
-      <h1>
-        PROMISSION
-      </h1>
-      <div>
-        <img
-          src="../public/img/person.jpg"
-          style="width: 50px; height: 50px; float: left;"
-        />
-        <h5
-          style="float: left; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif"
-        >
-          로그인 하세요
-        </h5>
-      </div>
-      <div style="float: right;">
-        <button class="a">로그인</button>
-        <button class="a">회원가입</button>
-      </div>
-      <br /><br /><br />
+  <body>
+    <h1>
+      PROMISSION
+    </h1>
+    <div>
+      <img src="../public/img/person.jpg" style="width: 50px; height: 50px; float: left;" />
+      <h5
+        style="float: left; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif"
+      >
+        로그인 하세요
+      </h5>
+    </div>
+    <div style="float: right;">
+      <button class="a">로그인</button>
+      <button class="a">회원가입</button>
+    </div>
+    <br /><br /><br />
 
-      <button class="b">ABOUT</button>
-      <button class="b">
-        미션지 검색
-      </button>
-      <button class="b">
-        미션 결과
-      </button>
-      <button class="c">
-        블록 정보
-      </button>
-      <button class="b">MY PAGE</button><br /><br />
-      <h3>블록 정보</h3>
-      <br />
-      <input
-        type="text"
-        id="missiontx_search"
-        placeholder="미션 트랜잭션 주소 검색"
-      />
-      <button id="transaction_search" onclick="gettransaction()">
-        미션 트랜잭션 검색
-      </button>
-    </body>
-  </center>
+    <button class="b">ABOUT</button>
+    <button class="b">
+      미션지 검색
+    </button>
+    <button class="b">
+      미션 결과
+    </button>
+    <button class="c">
+      블록 정보
+    </button>
+    <button class="b">MY PAGE</button><br /><br />
+    <h3>블록 정보</h3>
+    <br />
+    <input type="text" id="missiontx_search" placeholder="미션 트랜잭션 주소 검색" />
+    <button id="transaction_search" onclick="gettransaction()">
+      미션 트랜잭션 검색
+    </button>
+  </body>
 </html>

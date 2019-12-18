@@ -1,20 +1,21 @@
 import { SHA1 } from './sha1.js';
 
-console.log('login.js');
-
 $(document).ready(function() {
-  $('#login_button').on('click', function() {
-    let id = document.getElementById('id');
+  $('#changepassword_button').on('click', function() {
     let password = document.getElementById('password');
+    let oldpassword = document.getElementById('old_password');
 
-    let crypto_password = SHA1(password);
+    let crypto_newpassword = SHA1(password);
+    let crypto_oldpassword = SHA1(passwoldpasswordord);
+
     if (DEBUG) console.log(crypto_password);
     //DB에 post
     $.post(
-      '/user/login',
+      '/user/password/change',
       {
         user_id: id,
-        password: crypto_password,
+        old_pw: crypto_oldpassword,
+        new_pwd: crypto_newpassword,
       },
       function(data) {
         console.log('login_button : ', data);
