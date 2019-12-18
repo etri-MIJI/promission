@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+  <center>
+    <head>
+      <title>PROMISSION♥/MY PAGE</title>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <script src="http://code.jquery.com/jquery-latest.js "></script>
+      <script type="text/javascript" src="../public/js/qrcode.js"></script>
+      <link
+        rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"
+      />
+      <style>
+        body {
+          text-align: center;
+          background-color: rgb(194, 241, 255);
+        }
+
+        h1 {
+          font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        }
+
+        h3 {
+          font-family: monospace;
+        }
+
+        button {
+          background-color: white;
+        }
+
+        button.a {
+          height: 30px;
+          width: 80px;
+          float: right;
+          background-color: cornflowerblue;
+        }
+
+        button.b {
+          height: 40px;
+          width: 110px;
+          background-color: white;
+        }
+
+        button.c {
+          height: 40px;
+          width: 110px;
+          background-color: darkgray;
+        }
+
+        button.d {
+          background-color: black;
+          color: white;
+          width: 200px;
+        }
+        button.e {
+          background-color: black;
+          color: white;
+        }
+        button.f {
+          width: 100px;
+          height: 30px;
+        }
+        input.a {
+          width: 250px;
+        }
+        table {
+          border: 1px solid;
+          padding: 8px;
+          width: 500px;
+        }
+        table.a {
+          border: 1px solid;
+          padding: 8px;
+          width: 800px;
+        }
+        th,
+        td {
+          padding: 8px;
+          text-align: center;
+          border: 1px solid;
+        }
+      </style>
+
+      <script>
+        var mysql = require('mysql')
+
+        var con = mysql.createConnection({
+          host: 'localhost',
+          user: 'yourusername',
+          password: 'yourpassword',
+          database: 'mydb',
+        })
+
+        con.connect(function(err) {
+          if (err) throw err
+          con.query('SELECT name, address FROM customers', function(
+            err,
+            result,
+            fields
+          ) {
+            if (err) throw err
+            console.log(result)
+          })
+        })
+      </script>
+    </head>
+
+    <body>
+      <h1>
+        PROMISSION
+      </h1>
+      <div>
+        <img
+          src="../public/img/person.jpg"
+          style="width: 50px; height: 50px; float: left;"
+        />
+        <h5 id="id" style="float: left;">
+          User ID
+        </h5>
+      </div>
+      <div style="float: right;">
+        <button class="a">로그아웃</button>
+      </div>
+      <br /><br /><br />
+
+      <button style="height: 40px; width: 110px;">ABOUT</button>
+      <button style="height: 40px; width: 110px;">
+        미션지 검색
+      </button>
+      <button style="height: 40px; width: 110px;">
+        미션 결과
+      </button>
+      <button style="height: 40px; width: 110px;">
+        블록 정보
+      </button>
+      <button style="height: 40px; width: 110px; background-color: darkgray;">
+        MY PAGE
+      </button>
+      <br /><br />
+      <h3>미션 리스트</h3>
+      <br />
+      <table class="a">
+        <tr>
+          <th style="width: 50px;">No.</th>
+          <th style="width: 100px;">시청자</th>
+          <th style="width: 100px;">BJ</th>
+          <th>미션 내용</th>
+        </tr>
+      </table>
+    </body>
+  </center>
+</html>
