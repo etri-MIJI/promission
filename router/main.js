@@ -6,32 +6,34 @@ module.exports = function (app) {
    });
 
    //로그인 페이지
-   app.get('/login', function (req, res) {
+   app.get('/login-page', function (req, res) {
       res.render('login.html')
    });
 
    // 회원가입 페이지
-   app.get('/register', function (req, res) {
+   app.get('/register-page', function (req, res) {
       res.render('register.html')
    });
 
    // about 페이지
-   app.get('/about', function (req, res) {
+   app.get('/about-page', function (req, res) {
       //res.render('index.html')
    });
 
    // 미션지 검색 페이지
-   app.get('/mission_link', function (req, res) {
-      res.render('missionform_search.html')
+   app.get('/link-page', function (req, res) {
+      console.log('server app.get function');
+      res.render('missionform_search.html');
+      //res.redirect('missionform_search.html');
    });
 
    // 미션 결과 페이지
-   app.get('/mission_result', function (req, res) {
+   app.get('/result-page', function (req, res) {
       //res.render('.html')
    });
 
    // 미션 정보 페이지
-   app.get('/mission_info', function (req, res) {
+   app.get('/mission-info-page', function (req, res) {
       res.render('missiontx_search.html')
    });
 
@@ -41,7 +43,7 @@ module.exports = function (app) {
    });
 
    // 마이페이지 - 내 기록
-   app.get('/mypage/record', function (req, res) {
+   app.get('/mypage/record/{user_id}', function (req, res) {
       //res.render('index.html')
    });
 }
