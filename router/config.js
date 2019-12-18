@@ -9,7 +9,6 @@ var db = mysql.createConnection({
     database: "promission",
     port:"3306"
   });
-
   //let db = require('./login')(connection);
   
   // RDS에 접속합니다.
@@ -19,6 +18,8 @@ var db = mysql.createConnection({
     } else {
       // 접속
       console.log("데이터베이스 접속 완료");
+      //db.query('insert into user_info(user_id, nickname, password, email, wallet_address, link_address) values ("gggg", "gggggdfd", "sjdksdglsdf", "y@dd.com", "sdjkfldfkdl", "dlfkdfkldjk");');
+
       /*
       connection.query("SELECT * FROM fruit", function(err, rows, fields) {
         console.log(rows); // 결과를 출력합니다!
@@ -26,3 +27,5 @@ var db = mysql.createConnection({
       */
     }
   });
+
+  module.exports.db = db; 

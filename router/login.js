@@ -1,6 +1,9 @@
-let express = require('./config.js')
+let db = require('./config')
 
 module.exports = function (app) {
+    app.get('/', function (req, res){
+        console.log('message ');
+    });
 
     // 회원가입
     app.post("/user/register", function (req, res) {
@@ -9,9 +12,18 @@ module.exports = function (app) {
         let m_password = req.body.password;
         let m_wallet_address = req.body.wallet_address;
         let m_email = req.body.email;
+        let m_game_id = req.body.game_id;
+
+        console.log("user_id", m_user_id);
+        console.log("m_nickname", m_nickname);
+        console.log("m_password", m_password);
+        console.log("m_wallet_address", m_wallet_address);
+        console.log("m_email", m_email);
+        console.log("m_game_id", m_game_id);
+
 
         // DB에 저장
-        coneection.query('INSERT INTO USER_INFO(user_id, nickname, password, wallet_address, email) VALUES (' + m_user_id + ',' + m_nickname + ',' + m_password + ',' + m_wallet_address + ',' + m_email + ')', function(err, rows, fields){
+        db.db.query('INSERT INTO USER_INFO(user_id, nickname, password, wallet_address, email) VALUES ("' + m_user_id + '","' + m_nickname + '","' + m_password + '","' + m_wallet_address + '","' + m_email + '")', function(err, rows, fields){
             if(err) {
                 res.send({
                     result_code: 503,
@@ -33,7 +45,7 @@ module.exports = function (app) {
         let m_password = req.body.password;
 
         // DB에 저장된 내용과 비교
-        
+
 
         res.send({
             result_code: 200,
