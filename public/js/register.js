@@ -13,12 +13,13 @@ $(document).ready(function() {
     let password = $('#password').val();
     let repassword = $('#repassword').val();
     let nick = $('#nick').val();
+    let game_id = $('#game_id').val();
     let email = $('#email').val();
     let account = $('#account').val();
 
     let exptext = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
 
-    if (id == '' || password == '' || nick == '' || email == '' || account == '') {
+    if (id == '' || password == '' || nick == '' || email == '' || account == '' || game_id == '') {
       alert('회원가입 양식을 전부 채워주십시오');
     } else {
       if (password != repassword) {
@@ -46,6 +47,7 @@ $(document).ready(function() {
               password: crypto_password,
               wallet_address: account,
               email: email,
+              game_id: game_id,
             },
             function(data) {
               console.log('register_button : ', data);
