@@ -1,13 +1,14 @@
 var mysql = require('mysql');
+require('dotenv').config()
 
 // 커넥션을 정의합니다.
 // RDS Console 에서 본인이 설정한 값을 입력해주세요.
 var connection = mysql.createConnection({
-  host: "",
-  user: "admin",
-  password: "",
-  database: "promission",
-  port: "3306"
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_DATABASE,
+  port: process.env.DB_PORT
 });
 //let db = require('./login')(connection);
 

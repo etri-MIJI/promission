@@ -16,7 +16,7 @@ module.exports = function (app) {
     app.post("/user/check/id", function (req, res) {
         let m_user_id = req.body.user_id;
 
-        db.connetion.query('select user_id from user_info where user_id="' + m_user_id + '";', function (err, rows, fields) {
+        db.connetion.query('select user_id from user_info where user_id = ?;',[m_user_id], function (err, rows, fields) {
             if (debug) {
                 console.log('rows :', rows);
                 console.log('fields :', fields);
@@ -49,7 +49,7 @@ module.exports = function (app) {
     app.post("/user/check/nickname", function (req, res) {
         let m_nickname = req.body.nickname;
 
-        db.connetion.query('select nickname from user_info where nickname="' + m_nickname + '";', function (err, rows, fields) {
+        db.connetion.query('select nickname from user_info where nickname = ?;',[m_nickname], function (err, rows, fields) {
             if (err) {
                 res.send({
                     result_code: 500,
@@ -92,7 +92,7 @@ module.exports = function (app) {
         }
 
         // DB에 저장
-        db.connetion.query('insert into user_info(user_id, nickname, password, wallet_address, email, link_address) values ("' + m_user_id + '","' + m_nickname + '","' + m_password + '","' + m_wallet_address + '","' + m_email + '", "http://52.78.198.204:3000/' + m_user_id + '");', function (err, rows, fields) {
+        db.connetion.query('insert into user_info(user_id, nickname, password, wallet_address, email, link_address, game_id) values (?,?,?,?,?, "http://52.78.198.204:3000/' + m_user_id + '",?);',[m_user_id, m_nickname, m_password, m_wallet_address, m_email, m_game_id], function (err, rows, fields) {
             if (err) {
                 console.log(err);
                 res.send({
