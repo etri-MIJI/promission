@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<center>
+
 <html class="no-js" lang="zxx">
   <head>
     <meta charset="utf-8" />
@@ -24,61 +24,7 @@
     <link rel="stylesheet" href="css/slicknav.css" />
     <link rel="stylesheet" href="css/style.css" />
     <!-- <link rel="stylesheet" href="css/responsive.css"> -->
-    <script type="text/javascript">
-      console.log('starting...')
-      //connect web3 and check if web3 is connected correctly
-      if (typeof web3 !== 'undefined') {
-        web3 = new Web3(web3.currentProvider)
-      } else {
-        // set the provider you want from Web3.providers
-        web3 = new Web3(
-          new Web3.providers.HttpProvider('http://localhost:8545')
-        )
-      }
-
-      if (web3.isConnected()) {
-        console.log('connected')
-      } else {
-        console.log('not connected')
-      }
-
-      function gettransaction() {
-        var transactioninfo = document.getElementById('missiontx_search').value
-        console.log('transactioninfo : ' + transactioninfo)
-
-        web3.eth.getTransaction(transactioninfo, function(error, traninfo) {
-          if (!error) {
-            document.getElementById('blockHash').innerText = traninfo.blockHash
-            document.getElementById('from').innerText = traninfo.from
-            document.getElementById('nonce').innerText = traninfo.nonce
-            document.getElementById('gas').innerText = traninfo.gas
-            document.getElementById('gasPrice').innerText = traninfo.gasPrice
-            document.getElementById('hash').innerText = traninfo.hash
-
-            console.log(traninfo)
-            console.log('blockHash : ' + traninfo.blockHash)
-            console.log('blockNumber : ' + traninfo.blockNumber)
-            console.log('from : ' + traninfo.from)
-            console.log('gas : ' + traninfo.gas)
-            console.log('gasPrice : ' + traninfo.gasPrice)
-            console.log('hash : ' + traninfo.hash)
-
-            console.log('input : ' + traninfo.input)
-            console.log('nonce : ' + traninfo.nonce)
-            console.log('r : ' + traninfo.r)
-            console.log('s : ' + traninfo.s)
-            console.log('v : ' + traninfo.v)
-
-            console.log('to : ' + traninfo.to)
-            console.log('transactionIndex : ' + traninfo.transactionIndex)
-            console.log('value : ' + traninfo.value)
-          } else {
-            //res = error;
-            console.log(error)
-          }
-        })
-      }
-    </script>
+    
   </head>
 
   <body>
@@ -149,8 +95,8 @@
     </div>
     <br /><br />
     <!-- breadcam_area_end -->
-    <input style="width: 200px;" placeholder="ID" id="id" /><br /><br />
-    <input style="width: 200px;" placeholder="Password" type="password" id="password" /><br /><br />
+    <input class="a" placeholder="ID" id="id" /><br /><br />
+    <input class="a" placeholder="Password" type="password" id="password" /><br /><br />
     
     <button id="login_button" class="boxed-btn">로그인</button>
     <br /><br />
@@ -187,5 +133,5 @@
 
     <script src="js/main.js"></script>
   </body>
-</center>
+
 </html>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<center>
+
 <html class="no-js" lang="zxx">
   <head>
     <meta charset="utf-8" />
@@ -24,7 +24,6 @@
     <link rel="stylesheet" href="css/slicknav.css" />
     <link rel="stylesheet" href="css/style.css" />
     <!-- <link rel="stylesheet" href="css/responsive.css"> -->
-    
   </head>
 
   <body>
@@ -74,7 +73,9 @@
               <div class="col-xl-3 col-lg-3 d-none d-lg-block">
                 <div class="get_in_tauch">
                   <a href="login.html" class="boxed-btn" id="login">로그인</a>
-                  <a href="register.html" class="boxed-btn" id="register">회원가입</a>
+                  <a href="register.html" class="boxed-btn" id="register"
+                    >회원가입</a
+                  >
                 </div>
               </div>
               <div class="col-12">
@@ -98,13 +99,17 @@
     <input
       type="text"
       id="missiontx_search"
-      style="width: 300px;height: 50px;"
+      class="b"
       placeholder="미션 트랜잭션 주소 검색"
     />
-    
-    <button id="transaction_search" onclick="gettransaction()" class="boxed-btn">
-      미션 트랜잭션 검색
-    </button><br><br>
+
+    <button
+      id="transaction_search"
+      onclick="gettransaction()"
+      class="boxed-btn"
+    >
+      미션 트랜잭션 검색</button
+    ><br /><br />
 
     <!-- JS here -->
     <script src="js/vendor/modernizr-3.5.0.min.js"></script>
@@ -134,5 +139,4 @@
 
     <script src="js/main.js"></script>
   </body>
-</center>
 </html>

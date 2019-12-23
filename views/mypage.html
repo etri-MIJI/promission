@@ -29,12 +29,6 @@
     <link rel="stylesheet" href="css/slicknav.css" />
     <link rel="stylesheet" href="css/style.css" />
     <!-- <link rel="stylesheet" href="css/responsive.css"> -->
-
-    <style>
-      input.b {
-        width: 200px;
-      }
-    </style>
   </head>
 
   <body>
@@ -104,24 +98,22 @@
     </div>
     <!-- breadcam_area_end -->
     <br /><br />
-    <button
-      id="qrcodeBtn"
-      style="background-color: skyblue; font-size: larger;"
-    >
+    <button id="qrcodeBtn" class="q">
       Create QRCode</button
     ><br /><br />
-    <div id="qrcode" style="width:150px; height:150px;"></div>
+    <div id="qrcode"></div>
+
     <br />
 
     <input
-      class="b"
+      class="a"
       type="text"
       id="mission_search"
       placeholder="본인 전자지갑 주소"
     />
     <button id="btn1" class="e">복사</button><br /><br />
     <input
-      class="b"
+      class="a"
       type="text"
       id="mission_search"
       placeholder="미션 신청서 생성 링크"
