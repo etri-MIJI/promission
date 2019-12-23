@@ -1,5 +1,6 @@
+// 페이지 이동
+
 module.exports = function (app) {
-   // 페이지 이동
    // 메인페이지
    app.get('/', function (req, res) {
       res.render('main.html')
@@ -24,7 +25,6 @@ module.exports = function (app) {
    app.get('/link-page', function (req, res) {
       console.log('server app.get function');
       res.render('missionform_search.html');
-      //res.redirect('missionform_search.html');
    });
 
    // 미션 결과 페이지

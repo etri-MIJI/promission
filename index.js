@@ -9,6 +9,7 @@ app.use(bodyParser.json());
 
 let router = require('./router/main')(app); // /router/main을 연결시킨 것
 let login = require('./router/login')(app)
+let mission_link = require('./router/mission_link')(app)
 let port = 3000;
 
 // views 안에 html 파일들이 있다
