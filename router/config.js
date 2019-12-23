@@ -10,7 +10,6 @@ var connection = mysql.createConnection({
   database: process.env.DB_DATABASE,
   port: process.env.DB_PORT
 });
-//let db = require('./login')(connection);
 
 // RDS에 접속합니다.
 connection.connect(function (err) {
@@ -19,12 +18,6 @@ connection.connect(function (err) {
   } else {
     // 접속
     console.log("데이터베이스 접속 완료");
-
-    /*
-    connection.query("SELECT * FROM fruit", function(err, rows, fields) {
-      console.log(rows); // 결과를 출력합니다!
-    });
-    */
   }
 });
 

@@ -174,8 +174,6 @@ module.exports = function (app) {
 
     });
 
-    // 비밀번호 변경
-
     // 서비스 탈퇴
     app.post("/user/leave", function (res) {
         res.send({
