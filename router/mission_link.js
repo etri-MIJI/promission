@@ -83,4 +83,37 @@ module.exports = function (app) {
             }
         });
     });
+
+    // 각 유저의 링크를 클릭했을 때 미션폼을 띄워준다
+    app.get('/:user_id', function(req, res){
+        res.render('makeform.html');
+    });
+
+    // 각 유저의 미션폼에서 지갑 주소를 보내준다
+    app.get('/wallet-address/:user_id', function (req, res){
+        m_user_id = req.params.user_id;
+        db.connetion.query('select wallet_address from user_info where user_id = ?',[m_user_id], function(err, rows, fields){
+            if(err){
+                console.log(err);
+                res.send({
+                    result_code: 500,
+                    message: '에러'
+                });
+            }
+
+            if(rows.length > 0){
+                res.send({
+                   result_code: 200,
+                   message: rows[0].wallet_address 
+                });
+            }
+            else {
+                res.send({
+                    result_code: 506,
+                    message: '실패'
+                });
+            }
+        });
+        
+    });
 }
