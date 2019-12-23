@@ -1,168 +1,159 @@
 <!DOCTYPE html>
-<html>
-    <center>
+<html class="no-js" lang="zxx">
   <head>
-    <title>PROMISSION♥/MY PAGE</title>
-    <meta charset="UTF-8" />
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>PROMISSION</title>
+    <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+
     <script src="http://code.jquery.com/jquery-latest.js "></script>
-    <script type="text/javascript" src="/js/qrcode.js"></script>
+    <script type="text/javascript" src="../public/js/qrcode.js"></script>
+
+    <!-- <link rel="manifest" href="site.webmanifest"> -->
+    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.png" />
+    <!-- Place favicon.ico in the root directory -->
     <link
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"
     />
-    <style>
-      body {
-        text-align: center;
-        background-color: rgb(194, 241, 255);
-      }
-
-      h1 {
-        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-      }
-
-      h3 {
-        font-family: monospace;
-      }
-
-      button {
-        background-color: white;
-      }
-
-      button.a {
-        height: 30px;
-        width: 80px;
-        float: right;
-        background-color: cornflowerblue;
-      }
-
-      button.b {
-        height: 40px;
-        width: 110px;
-        background-color: white;
-      }
-
-      button.c {
-        height: 40px;
-        width: 110px;
-        background-color: darkgray;
-      }
-
-      button.d {
-        background-color: black;
-        color: white;
-        width: 200px;
-      }
-      button.e {
-        background-color: black;
-        color:white
-      }
-      button.f {
-        width: 100PX; height: 30px;
-      }
-      input.a {
-        width: 250px;
-      }
-    </style>
-    <script>
-      $(document).ready(function() {
-        let DEBUG = 1
-
-        let qrcode = new QRCode(document.getElementById('qrcode'), {
-          width: 150,
-          height: 150,
-        })
-
-        function makeCode() {
-          let elText = document.getElementById('fromaddress')
-
-          if (!elText.value) {
-            alert('Input a text')
-            elText.focus()
-            return
-          }
-          qrcode.makeCode(elText.value)
-        }
-
-        $('#qrcodeBtn').on('click', function() {
-          if (DEBUG) console.log('qrcodeBtn...... ')
-          makeCode()
-        }) // end of txbuilder
-      })
-    </script>
-    <script>
-      var mysql = require('mysql');
-
-      var con = mysql.createConnection({
-          host: "localhost",
-          user: "yourusername",
-          password: "yourpassword",
-          database: "mydb"
-      });
-
-      con.connect(function (err) {
-          if (err) throw err;
-          var sql = "DELETE FROM customers WHERE address = 'Mountain 21'";
-          con.query(sql, function (err, result) {
-              if (err) throw err;
-              console.log("Number of records deleted: " + result.affectedRows);
-          });
-      });
-
-  </script>
+    <!-- CSS here -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/owl.carousel.min.css" />
+    <link rel="stylesheet" href="css/magnific-popup.css" />
+    <link rel="stylesheet" href="css/font-awesome.min.css" />
+    <link rel="stylesheet" href="css/themify-icons.css" />
+    <link rel="stylesheet" href="css/nice-select.css" />
+    <link rel="stylesheet" href="css/flaticon.css" />
+    <link rel="stylesheet" href="css/animate.css" />
+    <link rel="stylesheet" href="css/slicknav.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <!-- <link rel="stylesheet" href="css/responsive.css"> -->
   </head>
 
-  <body style="background-color:rgb(194, 241, 255);">
-    <h1
-      style="text-align: center; font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;"
+  <body>
+    <!--[if lte IE 9]>
+      <p class="browserupgrade">
+        You are using an <strong>outdated</strong> browser. Please
+        <a href="https://browsehappy.com/">upgrade your browser</a> to improve
+        your experience and security.
+      </p>
+    <![endif]-->
+
+    <!-- header-start -->
+    <header>
+      <div class="header-area ">
+        <div id="sticky-header" class="main-header-area white-bg">
+          <div class="container-fluid p-0">
+            <div
+              class="row align-items-center justify-content-between no-gutters"
+            >
+              <div class="col-xl-2 col-lg-2">
+                <div class="logo-img">
+                  <a href="index.html">
+                    <img src="img/logo.png" alt="" />
+                  </a>
+                </div>
+              </div>
+              <div class="col-xl-7 col-lg-7">
+                <div class="main-menu  d-none d-lg-block">
+                  <nav>
+                    <ul id="navigation">
+                      <li><a class="active" href="about.html">About</a></li>
+                      <li><a href="searchmission.html">미션지 검색</a></li>
+                      <li><a href="missionresult.html">미션 결과</a></li>
+                      <li><a href="blockinfo.html">미션 정보</a></li>
+
+                      <li>
+                        <a href="#">My Page<i class="ti-angle-down"></i></a>
+                        <ul class="submenu">
+                          <li><a href="mypage.html">My Page</a></li>
+                          <li><a href="missionlist.html">미션 리스트</a></li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </nav>
+                </div>
+              </div>
+              <div class="col-xl-3 col-lg-3 d-none d-lg-block">
+                <div class="get_in_tauch">
+                  <a href="#" class="boxed-btn">로그아웃</a>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="mobile_menu d-block d-lg-none"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- header-end -->
+
+    <!-- breadcam_area_start -->
+    <div class="breadcam_area bradcam_bg overlay2">
+      <div class="bradcam_text">
+        <h3>my page</h3>
+      </div>
+    </div>
+    <!-- breadcam_area_end -->
+    <br /><br />
+    <button id="qrcodeBtn" class="q">
+      Create QRCode</button
+    ><br /><br />
+    <div id="qrcode"></div>
+
+    <br />
+
+    <input
+      class="a"
+      type="text"
+      id="mission_search"
+      placeholder="본인 전자지갑 주소"
+    />
+    <button id="btn1" class="e">복사</button><br /><br />
+    <input
+      class="a"
+      type="text"
+      id="mission_search"
+      placeholder="미션 신청서 생성 링크"
+    />
+    <button id="btn2" class="e">복사</button><br /><br /><br /><br />
+
+    <a href="changepassword.html"
+      ><button id="changepassword_button" class="boxed-btn">
+        비밀번호 변경
+      </button></a
     >
-      PROMISSION
-    </h1>
-    <div>
-      <img
-        src="../public/img/person.jpg"
-        style="width: 50px; height: 50px; float: left;"
-      />
-      <h5 id="id" style="float: left;">
-        User ID
-      </h5>
-    </div>
-    <div style="float: right;">
-      <button class="a">로그아웃</button>
-      <button id="mem_delete" class="a">회원 삭제</button>
-    </div>
-    <br /><br /><br />
-    
-      <button style="height: 40px; width: 110px;">ABOUT</button>
-      <button style="height: 40px; width: 110px;">
-        미션지 검색
-      </button>
-      <button style="height: 40px; width: 110px;">
-        미션 결과
-      </button>
-      <button style="height: 40px; width: 110px;">
-        블록 정보
-      </button>
-      <button style="height: 40px; width: 110px; background-color: darkgray;">
-        MY PAGE
-      </button>
-      <br /><br />
-      <button id="qrcodeBtn" style="background-color: skyblue;">Create QRCode</button><br><br>
-      <div
-        id="qrcode"
-        style="width:150px; height:150px;"
-      ></div>
-      <br />
-      <input style="width: 250px;" value="본인 전자지갑 주소" id="fromaddress"></input> </h5>
-      <button id="btn1" class="e">복사</button><br /><br />
-      <input style="width: 250px;" value="미션 신청서 생성 링크" />
-      <button id="btn2" class="e">복사</button><br /><br />
-      <button id="btn3" class="f">
-        <b>미션 리스트</b>
-      </button>
-      <br><br>
-      <button id="changepassword_button">비밀번호 변경</button>
-    
+    <button id="out" class="boxed-btn">회원 탈퇴</button>
+    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+
+    <!-- JS here -->
+    <script src="js/vendor/modernizr-3.5.0.min.js"></script>
+    <script src="js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/isotope.pkgd.min.js"></script>
+    <script src="js/ajax-form.js"></script>
+    <script src="js/waypoints.min.js"></script>
+    <script src="js/jquery.counterup.min.js"></script>
+    <script src="js/imagesloaded.pkgd.min.js"></script>
+    <script src="js/scrollIt.js"></script>
+    <script src="js/jquery.scrollUp.min.js"></script>
+    <script src="js/wow.min.js"></script>
+    <script src="js/nice-select.min.js"></script>
+    <script src="js/jquery.slicknav.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/plugins.js"></script>
+
+    <!--contact js-->
+    <script src="js/contact.js"></script>
+    <script src="js/jquery.ajaxchimp.min.js"></script>
+    <script src="js/jquery.form.js"></script>
+    <script src="js/jquery.validate.min.js"></script>
+    <script src="js/mail-script.js"></script>
+
+    <script src="js/main.js"></script>
   </body>
-</center>
 </html>
