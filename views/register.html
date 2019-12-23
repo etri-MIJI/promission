@@ -1,72 +1,249 @@
 <!DOCTYPE html>
-<html>
+<center>
+  <html class="no-js" lang="zxx">
+
   <head>
-    <meta charset="UTF-8" />
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>PROMISSION</title>
+    <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"
-    />
+
+    <!-- <link rel="manifest" href="site.webmanifest"> -->
+    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.png" />
+    <!-- Place favicon.ico in the root directory -->
+
+    <!-- CSS here -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/owl.carousel.min.css" />
+    <link rel="stylesheet" href="css/magnific-popup.css" />
+    <link rel="stylesheet" href="css/font-awesome.min.css" />
+    <link rel="stylesheet" href="css/themify-icons.css" />
+    <link rel="stylesheet" href="css/nice-select.css" />
+    <link rel="stylesheet" href="css/flaticon.css" />
+    <link rel="stylesheet" href="css/animate.css" />
+    <link rel="stylesheet" href="css/slicknav.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <!-- <link rel="stylesheet" href="css/responsive.css"> -->
+    <script type="text/javascript">
+      console.log('starting...')
+      //connect web3 and check if web3 is connected correctly
+      if (typeof web3 !== 'undefined') {
+        web3 = new Web3(web3.currentProvider)
+      } else {
+        // set the provider you want from Web3.providers
+        web3 = new Web3(
+          new Web3.providers.HttpProvider('http://localhost:8545')
+        )
+      }
+
+      if (web3.isConnected()) {
+        console.log('connected')
+      } else {
+        console.log('not connected')
+      }
+
+      function gettransaction() {
+        var transactioninfo = document.getElementById('missiontx_search').value
+        console.log('transactioninfo : ' + transactioninfo)
+
+        web3.eth.getTransaction(transactioninfo, function (error, traninfo) {
+          if (!error) {
+            document.getElementById('blockHash').innerText = traninfo.blockHash
+            document.getElementById('from').innerText = traninfo.from
+            document.getElementById('nonce').innerText = traninfo.nonce
+            document.getElementById('gas').innerText = traninfo.gas
+            document.getElementById('gasPrice').innerText = traninfo.gasPrice
+            document.getElementById('hash').innerText = traninfo.hash
+
+            console.log(traninfo)
+            console.log('blockHash : ' + traninfo.blockHash)
+            console.log('blockNumber : ' + traninfo.blockNumber)
+            console.log('from : ' + traninfo.from)
+            console.log('gas : ' + traninfo.gas)
+            console.log('gasPrice : ' + traninfo.gasPrice)
+            console.log('hash : ' + traninfo.hash)
+
+            console.log('input : ' + traninfo.input)
+            console.log('nonce : ' + traninfo.nonce)
+            console.log('r : ' + traninfo.r)
+            console.log('s : ' + traninfo.s)
+            console.log('v : ' + traninfo.v)
+
+            console.log('to : ' + traninfo.to)
+            console.log('transactionIndex : ' + traninfo.transactionIndex)
+            console.log('value : ' + traninfo.value)
+          } else {
+            //res = error;
+            console.log(error)
+          }
+        })
+      }
+      $(function () {
+        $('#password').keyup(function () {
+          $('#chkNotice').html('');
+        });
+
+        $('#repassword').keyup(function () {
+
+          if ($('#password').val() != $('#repassword').val()) {
+            $('#chkNotice').html('비밀번호 일치하지 않음');
+            $('#chkNotice').attr('color', '#f82a2aa3');
+          } else {
+            $('#chkNotice').html('비밀번호 일치함');
+            $('#chkNotice').attr('color', '#199894b3');
+          }
+
+        });
+      });
+    </script>
+    <style>
+      input.a {
+        width: 200px;
+      }
+    </style>
+
   </head>
 
   <body>
-    <br />
-    <br />
-    <h1>회원가입</h1>
-    <table>
-      <tr>
-        <th>ID:</th>
-        <td>
-          <input type="text" id="id" placeholder="ID는 중복되지 않아야 합니다." />
-        </td>
-        <td><button id="id_check">ID 중복 확인하기</button></td>
-      </tr>
-      <tr>
-        <th>Password:</th>
-        <td>
-          <input type="password" id="password" placeholder="패스워드를 입력해 주십시오" />
-        </td>
-        <td></td>
-      </tr>
-      <tr>
-        <th>Re Password:</th>
-        <td>
-          <input type="password" id="repassword" placeholder="패스워드를 다시 입력해 주십시오" />
-        </td>
-        <td></td>
-      </tr>
-      <tr>
-        <th>계좌 주소:</th>
-        <td>
-          <input type="text" id="account" placeholder="메타마스크에 연동된 계좌여야합니다" />
-        </td>
-        <td></td>
-      </tr>
-      <tr>
-        <th>닉네임:</th>
-        <td>
-          <input type="text" id="nick" placeholder="닉네임이 중복 되지 않아야 합니다" />
-        </td>
-        <td><button id="nick_check">닉네임 중복 확인하기</button></td>
-      </tr>
-      <tr>
-        <th>게임 ID:</th>
-        <td>
-          <input type="text" id="game_id" placeholder="정확하게 입력해주셔야 합니다.dak.gg 기준" />
-        </td>
-        <td></td>
-      </tr>
-      <tr>
-        <th>이메일:</th>
-        <td>
-          <input type="text" id="email" placeholder="이메일 형식을 지켜주십시오" />
-        </td>
-        <td></td>
-      </tr>
-    </table>
+    <!--[if lte IE 9]>
+      <p class="browserupgrade">
+        You are using an <strong>outdated</strong> browser. Please
+        <a href="https://browsehappy.com/">upgrade your browser</a> to improve
+        your experience and security.
+      </p>
+    <![endif]-->
 
-    <input type="button" value="등록" id="register_button" />
+    <!-- header-start -->
+    <header>
+      <div class="header-area ">
+        <div id="sticky-header" class="main-header-area white-bg">
+          <div class="container-fluid p-0">
+            <div class="row align-items-center justify-content-between no-gutters">
+              <div class="col-xl-2 col-lg-2">
+                <div class="logo-img">
+                  <a href="index.html">
+                    <img src="img/logo.png" alt="" />
+                  </a>
+                </div>
+              </div>
+              <div class="col-xl-7 col-lg-7">
+                <div class="main-menu  d-none d-lg-block">
+                  <nav>
+                    <ul id="navigation">
+                      <li><a class="active" href="about.html">About</a></li>
+                      <li><a href="searchmission.html">미션지 검색</a></li>
+                      <li><a href="missionresult.html">미션 결과</a></li>
+                      <li><a href="blockinfo.html">미션 정보</a></li>
+
+                      <li>
+                        <a href="#">My Page<i class="ti-angle-down"></i></a>
+                        <ul class="submenu">
+                          <li><a href="mypage.html">My Page</a></li>
+                          <li><a href="missionlist.html">미션 리스트</a></li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </nav>
+                </div>
+              </div>
+              <div class="col-xl-3 col-lg-3 d-none d-lg-block">
+                <div class="get_in_tauch">
+                  <a href="login.html" class="boxed-btn" id="login">로그인</a>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="mobile_menu d-block d-lg-none"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- header-end -->
+
+    <!-- breadcam_area_start -->
+    <div class="breadcam_area bradcam_bg overlay2">
+      <div class="bradcam_text">
+        <h3>회원 가입</h3>
+      </div>
+    </div>
+    <br /><br />
+    <!-- breadcam_area_end -->
+    <table>
+      <td>
+        <input type="text" id="id" placeholder="ID 입력" class="a" />
+      </td>
+      <td><button id="id_check">중복 확인</button></td>
+      </tr>
+      <tr>
+        <td>
+          <input type="text" id="nick" placeholder="닉네임" class="a" />
+        </td>
+        <td><button id="nick_search">중복 확인</button></td>
+      </tr>
+      <tr>
+        <td>
+          <input type="password" id="password" placeholder="Password 입력" class="a" />
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <input type="password" id="repassword" placeholder="Password 재입력" class="a" />
+        </td>
+        <td>
+          <p id="chkNotice" size="2"></p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <input type="text" id="account" placeholder="메타마스크에 연동된 계좌 주소" class="a" />
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <input type="text" id="game_id" placeholder="게임 ID(dak.gg 기준)" class="a" />
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <input type="text" id="email" placeholder="E-Mail" class="a" />
+        </td>
+      </tr>
+    </table><br><br>
+    <button id="register_button" class="boxed-btn">등록</button>
     <script src="https://code.jquery.com/jquery-latest.js "></script>
     <script type="module" src="/js/register.js"></script>
+    <br><br>
+
+    <!-- JS here -->
+    <script src="js/vendor/modernizr-3.5.0.min.js"></script>
+    <script src="js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/isotope.pkgd.min.js"></script>
+    <script src="js/ajax-form.js"></script>
+    <script src="js/waypoints.min.js"></script>
+    <script src="js/jquery.counterup.min.js"></script>
+    <script src="js/imagesloaded.pkgd.min.js"></script>
+    <script src="js/scrollIt.js"></script>
+    <script src="js/jquery.scrollUp.min.js"></script>
+    <script src="js/wow.min.js"></script>
+    <script src="js/nice-select.min.js"></script>
+    <script src="js/jquery.slicknav.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/plugins.js"></script>
+
+    <!--contact js-->
+    <script src="js/contact.js"></script>
+    <script src="js/jquery.ajaxchimp.min.js"></script>
+    <script src="js/jquery.form.js"></script>
+    <script src="js/jquery.validate.min.js"></script>
+    <script src="js/mail-script.js"></script>
+
+    <script src="js/main.js"></script>
   </body>
+</center>
+
 </html>
