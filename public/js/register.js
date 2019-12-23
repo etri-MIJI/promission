@@ -4,7 +4,7 @@ import { SHA1 } from './sha1.js';
 console.log('register.js');
 
 // console.log('SHA1:', SHA1('Hello world!!'));
-
+//get address
 $(document).ready(function() {
   let DEBUG = 1;
 
@@ -18,6 +18,42 @@ $(document).ready(function() {
   let id_check_flag = false;
   let nick_check_flag = false;
 
+  account_view();
+
+  async function account_view() {
+    if (window.ethereum)
+      try {
+        await window.ethereum.enable();
+        showInfo('ethereum.enable');
+      } catch (err) {
+        return showError('Access to your Ethereum account rejected.');
+      }
+
+    if (typeof web3 === 'undefined')
+      return showError(
+        'Please install MetaMask to access the Ethereum Web3 injected API from your Web browser.'
+      );
+
+    const myAddress = web3.eth.accounts[0];
+    console.log('test:', myAddress);
+    $('#account').val(myAddress);
+  }
+
+  function showInfo(message) {
+    $('#infoBox>p').html(message);
+    $('#infoBox').show();
+    $('#infoBox>header').click(function() {
+      $('#infoBox').hide();
+    });
+  }
+
+  function showError(errorMsg) {
+    $('#errorBox>p').html('Error: ' + errorMsg);
+    $('#errorBox').show();
+    $('#errorBox>header').click(function() {
+      $('#errorBox').hide();
+    });
+  }
   $('#register_button').on('click', function() {
     //html 값 받아오기
     let exptext = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
