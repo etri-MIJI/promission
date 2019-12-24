@@ -1,12 +1,13 @@
 pragma solidity ^0.4.25;
 
-contract MissionContract {
+import "./PMToken.sol";
+
+contract MissionContract is SimpleToken {
     address contractOwner;
     
     struct killStruct {
-      uint aboveKill; //몇 킬 이상시
-      uint perKill; //몇 킬당
-      uint killAmount; //보낼 이더의 양입니다. 
+      uint Kill; //몇 킬 이상시
+      uint killAmount; //보낼 토큰의 양입니다. 
     }
 
     struct rankStrcut {
@@ -24,11 +25,10 @@ contract MissionContract {
     }
     
     //킬미션 신청자의 주소와 신청내용을 저장합니다.
-    function setInstructorKill(address _address, uint _abovekill, uint _perkill, uint _killAmount) public {
+    function setInstructorKill(address _address, uint _Kill, uint _killAmount) public {
         var killInstructor = killStructs[_address];
 
-        killInstructor.aboveKill = _abovekill;
-        killInstructor.perKill = _perkill;
+        killInstructor.Kill = _Kill;
         killInstructor.killAmount = _killAmount;
         
         instructorAccts.push(_address) -1;
@@ -50,8 +50,8 @@ contract MissionContract {
     }
     
      //킬미션 신청자의 주소를 입력하면 신청내용을 호출합니다.
-    function getInstructorKill(address _address) view public returns (uint, uint, uint) {
-        return (killStructs[_address].aboveKill, killStructs[_address].perKill, killStructs[_address].killAmount);
+    function getInstructorKill(address _address) view public returns (uint, uint) {
+        return (killStructs[_address].Kill, killStructs[_address].killAmount);
     }
 
     //등수미션 신청자의 주소를 입력하면 신청내용을 호출합니다.
