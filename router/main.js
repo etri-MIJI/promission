@@ -33,7 +33,7 @@ module.exports = function (app) {
 
    // 미션 정보 페이지
    app.get('/mission-info-page', function (req, res) {
-      res.render('blockinfo.html')
+      res.render('missioninfo.html')
    });
 
    // 마이페이지 - 내 정보
