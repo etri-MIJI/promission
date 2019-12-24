@@ -3,7 +3,7 @@
 module.exports = function (app) {
    // 메인페이지
    app.get('/', function (req, res) {
-      res.render('main.html')
+      res.render('index.html')
    });
 
    //로그인 페이지
@@ -18,23 +18,22 @@ module.exports = function (app) {
 
    // about 페이지
    app.get('/about-page', function (req, res) {
-      //res.render('index.html')
+      res.render('about.html')
    });
 
-   // 미션지 검색 페이지
+   // 미션 링크 검색 페이지
    app.get('/link-page', function (req, res) {
-      console.log('server app.get function');
-      res.render('missionform_search.html');
+      res.render('missionsearch.html');
    });
 
    // 미션 결과 페이지
    app.get('/result-page', function (req, res) {
-      //res.render('.html')
+      res.render('missionresult.html')
    });
 
    // 미션 정보 페이지
    app.get('/mission-info-page', function (req, res) {
-      res.render('missiontx_search.html')
+      res.render('missioninfo.html')
    });
 
    // 마이페이지 - 내 정보
@@ -44,6 +43,6 @@ module.exports = function (app) {
 
    // 마이페이지 - 내 기록
    app.get('/mypage/record/{user_id}', function (req, res) {
-      //res.render('index.html')
+      res.render('missionlist.html')
    });
 }
