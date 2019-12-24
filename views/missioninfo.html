@@ -30,8 +30,8 @@
     <!--[if lte IE 9]>
       <p class="browserupgrade">
         You are using an <strong>outdated</strong> browser. Please
-        <a href="https://browsehappy.com/">upgrade your browser</a> to improve
-        your experience and security.
+        <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and
+        security.
       </p>
     <![endif]-->
 
@@ -40,9 +40,7 @@
       <div class="header-area ">
         <div id="sticky-header" class="main-header-area white-bg">
           <div class="container-fluid p-0">
-            <div
-              class="row align-items-center justify-content-between no-gutters"
-            >
+            <div class="row align-items-center justify-content-between no-gutters">
               <div class="col-xl-2 col-lg-2">
                 <div class="logo-img">
                   <a href="index.html">
@@ -75,9 +73,7 @@
               <div class="col-xl-3 col-lg-3 d-none d-lg-block">
                 <div class="get_in_tauch">
                   <a href="/login-page" class="boxed-btn" id="login">로그인</a>
-                  <a href="/register-page" class="boxed-btn" id="register"
-                    >회원가입</a
-                  >
+                  <a href="/register-page" class="boxed-btn" id="register">회원가입</a>
                 </div>
               </div>
               <div class="col-12">
@@ -98,20 +94,22 @@
     </div>
     <br /><br />
     <!-- breadcam_area_end -->
-    <input
-      type="text"
-      id="missiontx_search"
-      class="b"
-      placeholder="미션 트랜잭션 주소 검색"
-    />
+    <h3>미션 트랜잭션 주소 입력</h3>
+    <br /><br />
+    <table>
+      <tr>
+        <td><textarea id="dataInput" cols="50"> </textarea></td>
+        <td>
+          <button id="decode" class="boxed-btn">
+            미션 트랜잭션 검색
+          </button>
+        </td>
+      </tr>
+    </table>
 
-    <button
-      id="transaction_search"
-      onclick="gettransaction()"
-      class="boxed-btn"
-    >
-      미션 트랜잭션 검색</button
-    ><br /><br />
+    <hr />
+    <h3 id="mission_info"></h3>
+    <br /><br />
 
     <!-- JS here -->
     <script src="js/vendor/modernizr-3.5.0.min.js"></script>
@@ -138,6 +136,7 @@
     <script src="js/jquery.form.js"></script>
     <script src="js/jquery.validate.min.js"></script>
     <script src="js/mail-script.js"></script>
+    <script src="js/bundle.js"></script>
 
     <script src="js/main.js"></script>
   </body>
