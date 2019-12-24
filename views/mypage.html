@@ -9,6 +9,7 @@
 
     <script src="http://code.jquery.com/jquery-latest.js "></script>
     <script type="text/javascript" src="../public/js/qrcode.js"></script>
+    <script type="text/javascript" src="../public/js/coinstack-1.1.19.min.js"></script>
 
     <!-- <link rel="manifest" href="site.webmanifest"> -->
     <link rel="shortcut icon" type="image/x-icon" href="img/favicon.png" />
@@ -29,6 +30,109 @@
     <link rel="stylesheet" href="css/slicknav.css" />
     <link rel="stylesheet" href="css/style.css" />
     <!-- <link rel="stylesheet" href="css/responsive.css"> -->
+    <script>
+      $(document).ready(function() {
+        let DEBUG = 1
+        let privateKey = 'Ky2VG2TmERTXq5Cv7zk6fyhduv65ejnFx7fqi47vVyVPhnwVGCKP'
+        let client = new CoinStack(
+          'c7dbfacbdf1510889b38c01b8440b1',
+          '10e88e9904f29c98356fd2d12b26de',
+          'c3sp2.blocko.io',
+          'https'
+        )
+
+        if (DEBUG) {
+          console.log('client: ', client)
+          console.log('starting...')
+        }
+
+        $('#newSend').on('click', function() {
+          let toaccount = $('#i_address').val()
+          let fromaccount = $('#to_address').val()
+          let coin = $('#coin').val()
+
+          let txBuilder = client.createTransactionBuilder()
+          txBuilder.addOutput(toaccount, CoinStack.Math.toSatoshi(coin))
+          txBuilder.setInput(fromaccount)
+          txBuilder.buildTransaction(function(err, tx) {
+            try {
+              tx.sign(privateKey)
+
+              let rawTx = tx.serialize()
+              client.sendTransaction(rawTx, function(err) {
+                if (!err) {
+                  console.log('definition: ', tx.getHash())
+                  alert('거래가 완료 되었습니다..!!!')
+                }
+              })
+            } catch (e) {
+              console.log(e)
+            } //end of try
+          }) // end of txbuilder
+        })
+
+        $('#newBalance').on('click', function() {
+          let addr = $('#i_address').val
+          client.getBalance(addr, function(err, balance) {
+            if (!err) {
+              var total = CoinStack.Math.toBitcoin(balance)
+
+              $('#i_balance').val(total)
+
+              $('#message').text(' total: ' + total)
+              console.log('address: ', addr)
+              console.log('total: ', total)
+            } // end of if
+          })
+        })
+        $('#newAccount').on('click', function() {
+          let privateKey = CoinStack.ECKey.createKey()
+          if (DEBUG) console.log('privateKey : ', privateKey)
+
+          let account = CoinStack.ECKey.deriveAddress(privateKey)
+          if (DEBUG) console.log('account: ', account)
+
+          $('#i_address').val(account)
+
+          $('#message').text(' account: ' + account)
+          alert('Account 생성이 완료 되었습니다..!!!' + account)
+          // $('#i_password').val(privateKey);
+          // <input id="myField" type="text" name="email"/>
+          // getting the value
+          // let email = $("#myField").val();
+          // setting the value<h5>송신처  <input id="i_address" size="45" placeholder=""></input> </h5>
+        })
+        // $("#myField").val( "new value here" );
+        //
+      })
+    </script>
+    <script>
+      $(document).ready(function(){
+      
+        let DEBUG = 1;
+      
+        let qrcode = new QRCode(document.getElementById("qrcode"), {
+        width : 250,
+        height : 250
+        });
+      
+        function makeCode () {		
+        let elText = document.getElementById("fromaddress");
+        
+        if (!elText.value) {
+          alert("Input a text");
+          elText.focus();
+          return;
+        }
+        qrcode.makeCode(elText.value);
+        } 
+        
+        $('#qrcodeBtn').on('click', function(){
+          if (DEBUG) console.log("qrcodeBtn...... ");
+           makeCode();   
+          }) // end of txbuilder
+      })
+      </script>
   </head>
 
   <body>
@@ -50,7 +154,7 @@
             >
               <div class="col-xl-2 col-lg-2">
                 <div class="logo-img">
-                  <a href="index.html">
+                  <a href="/">
                     <img src="img/logo.png" alt="" />
                   </a>
                 </div>
@@ -59,16 +163,16 @@
                 <div class="main-menu  d-none d-lg-block">
                   <nav>
                     <ul id="navigation">
-                      <li><a class="active" href="about.html">About</a></li>
-                      <li><a href="searchmission.html">미션지 검색</a></li>
-                      <li><a href="missionresult.html">미션 결과</a></li>
-                      <li><a href="blockinfo.html">미션 정보</a></li>
+                      <li><a class="active" href="/about-page">About</a></li>
+                      <li><a href="/link-page">미션지 검색</a></li>
+                      <li><a href="/result-page">미션 결과</a></li>
+                      <li><a href="/mission-info-page">미션 정보</a></li>
 
                       <li>
                         <a href="#">My Page<i class="ti-angle-down"></i></a>
                         <ul class="submenu">
-                          <li><a href="mypage.html">My Page</a></li>
-                          <li><a href="missionlist.html">미션 리스트</a></li>
+                          <li><a href="/mypage">My Page</a></li>
+                          <li><a href="/mypage/record/{user_id}">미션 리스트</a></li>
                         </ul>
                       </li>
                     </ul>
@@ -89,7 +193,12 @@
       </div>
     </header>
     <!-- header-end -->
-
+    
+    
+    </div>
+    <br>
+    <br>
+   
     <!-- breadcam_area_start -->
     <div class="breadcam_area bradcam_bg overlay2">
       <div class="bradcam_text">
@@ -97,20 +206,20 @@
       </div>
     </div>
     <!-- breadcam_area_end -->
-    <br /><br />
-    <button id="qrcodeBtn" class="q">
-      Create QRCode</button
-    ><br /><br />
-    <div id="qrcode"></div>
+    <div class="container theme-showcase" role="main">
+      
+      <div id="tablePlace"></div>
+    <button id="qrcodeBtn"> Create QRCode </button>
+      
+          <div id="message"></div>
+      <div id="qrcode" style="width:250px; height:250px; margin-top:15px;"></div>
+  </div>
+  <div id="tablePlace"></div>
+
+  
 
     <br />
-
-    <input
-      class="a"
-      type="text"
-      id="mission_search"
-      placeholder="본인 전자지갑 주소"
-    />
+    <input class="a" type="text" value="13isWyA23uSfTnGqRDM3n4famvybaQkL6B" id="fromaddress" placeholder="본인 전자지갑 주소"></input>
     <button id="btn1" class="e">복사</button><br /><br />
     <input
       class="a"
@@ -120,7 +229,7 @@
     />
     <button id="btn2" class="e">복사</button><br /><br /><br /><br />
 
-    <a href="changepassword.html"
+    <a href="/user/password/change"
       ><button id="changepassword_button" class="boxed-btn">
         비밀번호 변경
       </button></a
