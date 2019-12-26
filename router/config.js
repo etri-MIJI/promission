@@ -8,7 +8,8 @@ var connection = mysql.createConnection({
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_DATABASE,
-  port: process.env.DB_PORT
+  port: process.env.DB_PORT,
+  timezone: 'GMT+0900' // 한국시간 적용
 });
 
 // RDS에 접속합니다.
