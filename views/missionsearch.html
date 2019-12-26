@@ -23,19 +23,14 @@
     <link rel="stylesheet" href="css/slicknav.css" />
     <link rel="stylesheet" href="css/style.css" />
     <!-- <link rel="stylesheet" href="css/responsive.css"> -->
-    <script>
-      function search() {
-        document.getElementById('mission_search')
-      }
-    </script>
   </head>
 
   <body>
     <!--[if lte IE 9]>
       <p class="browserupgrade">
         You are using an <strong>outdated</strong> browser. Please
-        <a href="https://browsehappy.com/">upgrade your browser</a> to improve
-        your experience and security.
+        <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and
+        security.
       </p>
     <![endif]-->
 
@@ -44,9 +39,7 @@
       <div class="header-area ">
         <div id="sticky-header" class="main-header-area white-bg">
           <div class="container-fluid p-0">
-            <div
-              class="row align-items-center justify-content-between no-gutters"
-            >
+            <div class="row align-items-center justify-content-between no-gutters">
               <div class="col-xl-2 col-lg-2">
                 <div class="logo-img">
                   <a href="/">
@@ -79,9 +72,7 @@
               <div class="col-xl-3 col-lg-3 d-none d-lg-block">
                 <div class="get_in_tauch">
                   <a href="/login-page" class="boxed-btn" id="login">로그인</a>
-                  <a href="/register-page" class="boxed-btn" id="register"
-                    >회원가입</a
-                  >
+                  <a href="/register-page" class="boxed-btn" id="register">회원가입</a>
                 </div>
               </div>
               <div class="col-12">
@@ -102,93 +93,56 @@
     </div>
     <br /><br />
     <!-- breadcam_area_end -->
-    <input
-      type="text"
-      id="mission_search"
-      class="b"
-      placeholder="BJ 닉네임 검색"
-    />
-    <button id="nick_search" class="boxed-btn" onclick="search()">
-      닉네임 검색</button
-    ><br /><br /><br />
-    <div class="progress-table-wrap">
+    <input type="text" id="nickname" class="b" placeholder="BJ 닉네임 검색" />
+    <button id="nick_search" class="boxed-btn">
+      닉네임 검색
+    </button>
+    <br /><br /><br />
+    <center>
+      <table class="nickname1 nickname" id="linkTable">
+        <tr>
+          <td>닉네임</td>
+          <td>미션지 주소</td>
+        </tr>
+      </table>
+    </center>
+
+    <!-- <div class="progress-table-wrap">
       <div class="progress-table">
         <div class="table-head">
           <div class="nickname1 nickname">닉네임</div>
           <div class="address1 address">미션지 주소</div>
         </div>
         <div class="table-row">
-          <div class="nickname">
-            a
-          </div>
-          <div class="address">645032</div>
-        </div>
-
-        <div class="table-row">
-          <div class="nickname">
-            a
-          </div>
-          <div class="address">645032</div>
-        </div>
-        <div class="table-row">
-          <div class="nickname">
-            a
-          </div>
-          <div class="address">645032</div>
-        </div>
-        <div class="table-row">
-          <div class="nickname">
-            a
-          </div>
-          <div class="address">645032</div>
-        </div>
-        <div class="table-row">
-          <div class="nickname">
-            a
-          </div>
-          <div class="address">645032</div>
-        </div>
-        <div class="table-row">
-          <div class="nickname">
-            a
-          </div>
-          <div class="address">645032</div>
-        </div>
-        <div class="table-row">
-          <div class="nickname">
-            a
-          </div>
-          <div class="address">645032</div>
-        </div>
-        <div class="table-row">
-          <div class="nickname">
-            a
-          </div>
-          <div class="address">645032</div>
+          <div class="nickname" id="nickSearch"></div>
+          <div class="address" id="addressSearch"></div>
         </div>
       </div>
-    </div>
+    </div> -->
 
     <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
 
     <!-- JS here -->
-    <script src="js/vendor/modernizr-3.5.0.min.js"></script>
     <script src="js/vendor/jquery-1.12.4.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/isotope.pkgd.min.js"></script>
-    <script src="js/ajax-form.js"></script>
-    <script src="js/waypoints.min.js"></script>
     <script src="js/jquery.counterup.min.js"></script>
-    <script src="js/imagesloaded.pkgd.min.js"></script>
     <script src="js/scrollIt.js"></script>
     <script src="js/jquery.scrollUp.min.js"></script>
     <script src="js/wow.min.js"></script>
-    <script src="js/nice-select.min.js"></script>
     <script src="js/jquery.slicknav.min.js"></script>
     <script src="js/jquery.magnific-popup.min.js"></script>
-    <script src="js/plugins.js"></script>
+    <!-- <script src="js/imagesloaded.pkgd.min.js"></script> -->
+    <!-- <script src="js/vendor/modernizr-3.5.0.min.js"></script> -->
+    <!-- <script src="js/popper.min.js"></script> -->
+    <!-- <script src="js/bootstrap.min.js"></script> -->
+    <!-- <script src="js/ajax-form.js"></script> -->
+    <!-- <script src="js/waypoints.min.js"></script> -->
+    <!-- <script src="js/nice-select.min.js"></script> -->
+    <!-- <script src="js/plugins.js"></script> -->
+    <!-- <script src="js/jquery.form.js"></script> -->
+    <!-- <script src="js/jquery.validate.min.js"></script> -->
+    <!-- <script src="js/mail-script.js"></script> -->
 
     <!--contact js-->
     <script src="js/contact.js"></script>
@@ -196,7 +150,7 @@
     <script src="js/jquery.form.js"></script>
     <script src="js/jquery.validate.min.js"></script>
     <script src="js/mail-script.js"></script>
-
+    <script src="js/missionsearch.js"></script>
     <script src="js/main.js"></script>
   </body>
 </html>
