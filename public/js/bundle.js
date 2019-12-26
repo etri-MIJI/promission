@@ -212,9 +212,9 @@ if(DEBUG)console.log(data);
   // } catch(error) {
   // }
   if(result.names[1]=="_rank"){
-    document.getElementById('mission_info').innerHTML="미션 보낸 사람 계좌: "+result.inputs[0]+"<br>"+result.inputs[1].words[0]+"등 이내 달성 시<br>"+result.inputs[2].words[0]+"ETH 지급";
+    document.getElementById('mission_info').innerHTML="<label>미션 보낸 사람 계좌: "+result.inputs[0]+"</label><br>"+result.inputs[1].words[0]+"등 이내 달성 시<br>"+result.inputs[2].words[0]+"ETH 지급";
   }else if(result.names[1]=="_kill"){
-    document.getElementById('mission_info').innerHTML="미션 보낸 사람 계좌: "+result.inputs[0]+"<br>"+result.inputs[1].words[0]+"킬 이상 달성 시<br>"+result.inputs[2].words[0]+"ETH 지급";
+    document.getElementById('mission_info').innerHTML="<label>미션 보낸 사람 계좌: "+result.inputs[0]+"</label><br>"+result.inputs[1].words[0]+"킬 이상 달성 시<br>"+result.inputs[2].words[0]+"ETH 지급";
   }
   
 
