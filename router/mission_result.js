@@ -28,7 +28,7 @@ module.exports = function (app) {
                 res.send({
                     result_code: 200,
                     message: '성공',
-                    data: json_object
+                    list: json_object
                 });
             }
             else {
@@ -69,7 +69,7 @@ module.exports = function (app) {
                 res.send({
                     result_code: 200,
                     message: '성공',
-                    data: json_object
+                    list: json_object
                 });
             }
             else {
