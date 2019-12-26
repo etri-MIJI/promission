@@ -10,7 +10,7 @@ $(document).ready(function() {
 
     if (DEBUG) console.log(crypto_password);
     //DB에 post
-    $.post(
+    $.put(
       '/user/password/change',
       {
         user_id: id,
@@ -18,7 +18,7 @@ $(document).ready(function() {
         new_pwd: crypto_newpassword,
       },
       function(data) {
-        console.log('login_button : ', data);
+        console.log('change_password : ', data);
       }
     ); // end of post
   }); //end of login_button click

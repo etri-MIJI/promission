@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html class="no-js" lang="zxx">
   <head>
     <meta charset="utf-8" />
@@ -30,8 +29,8 @@
     <!--[if lte IE 9]>
       <p class="browserupgrade">
         You are using an <strong>outdated</strong> browser. Please
-        <a href="https://browsehappy.com/">upgrade your browser</a> to improve
-        your experience and security.
+        <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and
+        security.
       </p>
     <![endif]-->
 
@@ -40,12 +39,10 @@
       <div class="header-area ">
         <div id="sticky-header" class="main-header-area white-bg">
           <div class="container-fluid p-0">
-            <div
-              class="row align-items-center justify-content-between no-gutters"
-            >
+            <div class="row align-items-center justify-content-between no-gutters">
               <div class="col-xl-2 col-lg-2">
                 <div class="logo-img">
-                  <a href="index.html">
+                  <a href="/">
                     <img src="img/logo.png" alt="" />
                   </a>
                 </div>
@@ -54,16 +51,18 @@
                 <div class="main-menu  d-none d-lg-block">
                   <nav>
                     <ul id="navigation">
-                      <li><a class="active" href="about.html">About</a></li>
-                      <li><a href="searchmission.html">미션지 검색</a></li>
-                      <li><a href="missionresult.html">미션 결과</a></li>
-                      <li><a href="blockinfo.html">미션 정보</a></li>
+                      <li><a class="active" href="/about-page">About</a></li>
+                      <li><a href="/link-page">미션지 검색</a></li>
+                      <li><a href="/result-page">미션 결과</a></li>
+                      <li><a href="/mission-info-page">미션 정보</a></li>
 
                       <li>
                         <a href="#">My Page<i class="ti-angle-down"></i></a>
                         <ul class="submenu">
-                          <li><a href="mypage.html">My Page</a></li>
-                          <li><a href="missionlist.html">미션 리스트</a></li>
+                          <li><a href="/mypage">My Page</a></li>
+                          <li>
+                            <a href="/mypage/record/{user_id}">미션 리스트</a>
+                          </li>
                         </ul>
                       </li>
                     </ul>
@@ -72,10 +71,8 @@
               </div>
               <div class="col-xl-3 col-lg-3 d-none d-lg-block">
                 <div class="get_in_tauch">
-                  <a href="login.html" class="boxed-btn" id="login">로그인</a>
-                  <a href="register.html" class="boxed-btn" id="register"
-                    >회원가입</a
-                  >
+                  <a href="/login-page" class="boxed-btn" id="login">로그인</a>
+                  <a href="/register-page" class="boxed-btn" id="register">회원가입</a>
                 </div>
               </div>
               <div class="col-12">
@@ -91,44 +88,61 @@
     <!-- breadcam_area_start -->
     <div class="breadcam_area bradcam_bg overlay2">
       <div class="bradcam_text">
-        <h3>미션 정보</h3>
+        <h3>미션지 검색</h3>
       </div>
     </div>
     <br /><br />
     <!-- breadcam_area_end -->
-    <input
-      type="text"
-      id="missiontx_search"
-      class="b"
-      placeholder="미션 트랜잭션 주소 검색"
-    />
+    <input type="text" id="nickname" class="b" placeholder="BJ 닉네임 검색" />
+    <button id="nick_search" class="boxed-btn">
+      닉네임 검색
+    </button>
+    <br /><br /><br />
+    <center>
+      <table class="nickname1 nickname" id="linkTable">
+        <tr>
+          <td>닉네임</td>
+          <td>미션지 주소</td>
+        </tr>
+      </table>
+    </center>
 
-    <button
-      id="transaction_search"
-      onclick="gettransaction()"
-      class="boxed-btn"
-    >
-      미션 트랜잭션 검색</button
-    ><br /><br />
+    <!-- <div class="progress-table-wrap">
+      <div class="progress-table">
+        <div class="table-head">
+          <div class="nickname1 nickname">닉네임</div>
+          <div class="address1 address">미션지 주소</div>
+        </div>
+        <div class="table-row">
+          <div class="nickname" id="nickSearch"></div>
+          <div class="address" id="addressSearch"></div>
+        </div>
+      </div>
+    </div> -->
+
+    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
 
     <!-- JS here -->
-    <script src="js/vendor/modernizr-3.5.0.min.js"></script>
     <script src="js/vendor/jquery-1.12.4.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/isotope.pkgd.min.js"></script>
-    <script src="js/ajax-form.js"></script>
-    <script src="js/waypoints.min.js"></script>
     <script src="js/jquery.counterup.min.js"></script>
-    <script src="js/imagesloaded.pkgd.min.js"></script>
     <script src="js/scrollIt.js"></script>
     <script src="js/jquery.scrollUp.min.js"></script>
     <script src="js/wow.min.js"></script>
-    <script src="js/nice-select.min.js"></script>
     <script src="js/jquery.slicknav.min.js"></script>
     <script src="js/jquery.magnific-popup.min.js"></script>
-    <script src="js/plugins.js"></script>
+    <!-- <script src="js/imagesloaded.pkgd.min.js"></script> -->
+    <!-- <script src="js/vendor/modernizr-3.5.0.min.js"></script> -->
+    <!-- <script src="js/popper.min.js"></script> -->
+    <!-- <script src="js/bootstrap.min.js"></script> -->
+    <!-- <script src="js/ajax-form.js"></script> -->
+    <!-- <script src="js/waypoints.min.js"></script> -->
+    <!-- <script src="js/nice-select.min.js"></script> -->
+    <!-- <script src="js/plugins.js"></script> -->
+    <!-- <script src="js/jquery.form.js"></script> -->
+    <!-- <script src="js/jquery.validate.min.js"></script> -->
+    <!-- <script src="js/mail-script.js"></script> -->
 
     <!--contact js-->
     <script src="js/contact.js"></script>
@@ -136,7 +150,7 @@
     <script src="js/jquery.form.js"></script>
     <script src="js/jquery.validate.min.js"></script>
     <script src="js/mail-script.js"></script>
-
+    <script src="js/missionsearch.js"></script>
     <script src="js/main.js"></script>
   </body>
 </html>

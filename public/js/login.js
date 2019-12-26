@@ -4,11 +4,12 @@ console.log('login.js');
 
 $(document).ready(function() {
   $('#login_button').on('click', function() {
-    let id = document.getElementById('id');
-    let password = document.getElementById('password');
+    let id = document.getElementById('id').value;
+    let password = document.getElementById('password').value;
 
+    //password 암호화
     let crypto_password = SHA1(password);
-    if (DEBUG) console.log(crypto_password);
+
     //DB에 post
     $.post(
       '/user/login',

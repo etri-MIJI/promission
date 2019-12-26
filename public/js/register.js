@@ -8,18 +8,18 @@ console.log('register.js');
 $(document).ready(function() {
   let DEBUG = 1;
 
-  let id = $('#id').val();
-  let password = $('#password').val();
-  let repassword = $('#repassword').val();
-  let nick = $('#nick').val();
-  let game_id = $('#game_id').val();
-  let email = $('#email').val();
-  let account = $('#account').val();
+  var id;
+  var password;
+  var repassword;
+  var nick;
+  var game_id;
+  var email;
+  var account;
   let id_check_flag = false;
   let nick_check_flag = false;
 
   account_view();
-
+  //metamask 계좌 가져오기
   async function account_view() {
     if (window.ethereum)
       try {
@@ -54,8 +54,16 @@ $(document).ready(function() {
       $('#errorBox').hide();
     });
   }
+
   $('#register_button').on('click', function() {
     //html 값 받아오기
+
+    password = $('#password').val();
+    repassword = $('#repassword').val();
+    game_id = $('#game_id').val();
+    email = $('#email').val();
+    account = $('#account').val();
+
     let exptext = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
 
     if (id == '' || password == '' || nick == '' || email == '' || account == '' || game_id == '') {
@@ -78,20 +86,16 @@ $(document).ready(function() {
             let crypto_password = SHA1(password);
             if (DEBUG) console.log(crypto_password);
 
-            let postData = {
-              user_id: id,
-              nickname: nick,
-              password: crypto_password,
-              wallet_address: account,
-              email: email,
-              game_id: game_id,
-            };
-
             //DB에 post
             $.post(
               '/user/register',
               {
-                postData,
+                user_id: id,
+                nickname: nick,
+                password: crypto_password,
+                wallet_address: account,
+                email: email,
+                game_id: game_id,
               },
               function(data) {
                 if (DEBUG) console.log('register post result : ', data);
@@ -111,7 +115,9 @@ $(document).ready(function() {
     } //end of email check
   }); // end of register_button
 
+  //id 중복 확인
   $('#id_check').on('click', function() {
+    id = $('#id').val();
     id_check_flag = false;
 
     $.post(
@@ -125,16 +131,22 @@ $(document).ready(function() {
         if (data.result_code == 200) {
           id_check_flag = true;
           alert('id를 사용하실 수 있습니다.');
+        } else if (data.result_code == 503) {
+          $('#id_check').val('');
+          $('#id_check').focus();
+          alert('id가 중복됩니다.  다시 입력하여 주십시오.');
         } else {
           $('#id_check').val('');
           $('#id_check').focus();
-          alert('id가 중복됩니다.  다시 입력해 주십시오.');
+          alert('중복 확인에 실패 했습니다. 다시 입력하여 주십시오.');
         } //end of if(result==200)
       }
     ); // end of post
   }); //end of id_check click
 
+  //닉네임 중복 확인
   $('#nick_check').on('click', function() {
+    nick = $('#nick').val();
     nick_check_flag = false;
     $.post(
       '/user/check/nickname',
@@ -147,10 +159,14 @@ $(document).ready(function() {
         if (data.result_code == 200) {
           nick_check_flag = true;
           alert('닉네임을 사용하실 수 있습니다.');
-        } else {
+        } else if (data.result_code == 503) {
           $('#nick_check').val('');
           $('#nick_check').focus();
           alert('nick가 중복됩니다.  다시 입력해 주십시오.');
+        } else {
+          $('#nick_check').val('');
+          $('#nick_check').focus();
+          alert('닉네임 중복 확인에 실패 했습니다. 다시 입력하여 주십시오.');
         } //end of if(result==200)
       }
     ); // end of post

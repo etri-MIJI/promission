@@ -3,7 +3,7 @@ $(document).ready(function() {
     let id = document.getElementById('id');
     let email = document.getElementById('email');
     //DB에 post
-    $.post(
+    $.put(
       '/user/password/find',
       {
         user_id: id,
