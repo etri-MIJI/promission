@@ -7,6 +7,8 @@
     <title>PROMISSION</title>
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="/js/formType.js"></script>
 
     <!-- <link rel="manifest" href="site.webmanifest"> -->
     <link rel="shortcut icon" type="image/x-icon" href="img/favicon.png" />
@@ -95,24 +97,22 @@
     </div>
     <br /><br />
     <!-- breadcam_area_end -->
-    받는사람 계좌 <input class="b" ><br><br>
-    본인 계좌 <input class="b" >
+    받는사람 계좌 <p id="accountId" class="b" ></p><br><br>
+    본인 계좌 <input id="myAccountId" class="b" ></input>
     <br><br><br>
-    <input type="radio" name="formtype" value="form1" checked onclick="viewform(1)"/>폼1
-    <input type="radio" name="formtype" value="form2" onclick="viewform(2)"/>폼2
+    <input type="radio" id="formtype1" name="formtype" value=1 checked/>타입1
+    <input type="radio" id="formtype2" name="formtype" value=2 />타입2
     <br><br><hr>
     <div id="formplace"></div>
-    <button id="submit" class="boxed-btn">미션 제출</button>
-    <button id="cancel" class="boxed-btn">미션 취소</button>
-    
+    <button id="missionSubmit" class="boxed-btn">미션 제출</button>
+    <button id="missioncancel" class="boxed-btn">미션 취소</button>
     
   </body>
-  <script src="/js/makeform.js"></script>
+  
     <br><br>
 
     <!-- JS here -->
     <script src="js/vendor/modernizr-3.5.0.min.js"></script>
-    <script src="js/vendor/jquery-1.12.4.min.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/owl.carousel.min.js"></script>
@@ -127,7 +127,8 @@
     <script src="js/nice-select.min.js"></script>
     <script src="js/jquery.slicknav.min.js"></script>
     <script src="js/jquery.magnific-popup.min.js"></script>
-    <script src="js/plugins.js"></script>
+    <script src="js/plugins.js"></script>    
+
 
     <!--contact js-->
     <script src="js/contact.js"></script>
@@ -135,8 +136,11 @@
     <script src="js/jquery.form.js"></script>
     <script src="js/jquery.validate.min.js"></script>
     <script src="js/mail-script.js"></script>
-
     <script src="js/main.js"></script>
+    <script type="text/javascript" src="/contracts/contractabi.js"></script>
+    <script type="text/javascript" src="/contracts/contractaddress.js"></script>
+    <script src="/js/makeform.js"></script>
+    
   </body>
 
 </html>

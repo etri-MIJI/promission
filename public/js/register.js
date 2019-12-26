@@ -131,10 +131,14 @@ $(document).ready(function() {
         if (data.result_code == 200) {
           id_check_flag = true;
           alert('id를 사용하실 수 있습니다.');
+        } else if (data.result_code == 503) {
+          $('#id_check').val('');
+          $('#id_check').focus();
+          alert('id가 중복됩니다.  다시 입력하여 주십시오.');
         } else {
           $('#id_check').val('');
           $('#id_check').focus();
-          alert('id가 중복됩니다.  다시 입력해 주십시오.');
+          alert('중복 확인에 실패 했습니다. 다시 입력하여 주십시오.');
         } //end of if(result==200)
       }
     ); // end of post
@@ -155,10 +159,14 @@ $(document).ready(function() {
         if (data.result_code == 200) {
           nick_check_flag = true;
           alert('닉네임을 사용하실 수 있습니다.');
-        } else {
+        } else if (data.result_code == 503) {
           $('#nick_check').val('');
           $('#nick_check').focus();
           alert('nick가 중복됩니다.  다시 입력해 주십시오.');
+        } else {
+          $('#nick_check').val('');
+          $('#nick_check').focus();
+          alert('닉네임 중복 확인에 실패 했습니다. 다시 입력하여 주십시오.');
         } //end of if(result==200)
       }
     ); // end of post
