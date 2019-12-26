@@ -151,6 +151,22 @@ let abi =[
 	}
 ];
 console.log(abi);
+// const dataInput = document.querySelector('#dataInput');
+
+// //connect ropsten
+
+var web3 = new Web3(
+  new Web3.providers.HttpProvider(
+    'https://ropsten.infura.io/v3/2497565aba234499a046eed5affa5130'
+  )
+); //end of web3
+//get input_data
+
+
+// $(document).ready(function() {
+// Document.getElementById('dataInput').value=inputData;
+// });
+
 const dataInput = document.querySelector('#dataInput');
 const output = document.querySelector('#output');
 
@@ -163,14 +179,18 @@ function decode() {
   const decoder = new InputDataDecoder(abi);
 
   // if copied and pasted from etherscan only get data we need
-  const data = dataInput.value.trim()
-  .replace(/(?:[\s\S]*MethodID: (.*)[\s\S])?[\s\S]?\[\d\]:(.*)/gi, '$1$2')
-  
-  dataInput.value = data
+//   const data = dataInput.value.trim()
+//   .replace(/(?:[\s\S]*MethodID: (.*)[\s\S])?[\s\S]?\[\d\]:(.*)/gi, '$1$2')
+//  console.log(data==inputData);
+let input_transaction=document.getElementById('dataInput').value;
+let transactionData = web3.eth.getTransaction(input_transaction);
+if(DEBUG) console.log(transactionData);
+let data=transactionData.input;
+if(DEBUG)console.log(data);
 
   const result = decoder.decodeData(data);
-
   console.log("result:",result);
+  
   
   // if(DEBUG){
   // document.getElementById('output').innerHTML=a;
@@ -196,6 +216,7 @@ function decode() {
   }else if(result.names[1]=="_kill"){
     document.getElementById('mission_info').innerHTML="미션 보낸 사람 계좌: "+result.inputs[0]+"<br>"+result.inputs[1].words[0]+"킬 이상 달성 시<br>"+result.inputs[2].words[0]+"ETH 지급";
   }
+  
 
   // alert("총 상금은?",ether);
 
@@ -203,11 +224,11 @@ function decode() {
 
 document.querySelector('#decode')
 .addEventListener('click', function(event) {
-  event.preventDefault();
+  // event.preventDefault();
   decode();
 });
 
-decode();
+// decode();
 
 },{"../index":2}],2:[function(require,module,exports){
 const fs = require('fs')
