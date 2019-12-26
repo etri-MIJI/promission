@@ -1,6 +1,97 @@
 let db = require('./config')
 const session = require('express-session'); // 로그인 세션 유지를 위해 필요
 const FileStore = require('session-file-store')(session);
+const Web3 = require('web3');
+const ContractAddress = '0x8a493319e470a1fde5c812c726c645772babe95d'; // 토큰 컨트랙트 주소
+const web3 = new Web3(
+    'https://ropsten.infura.io/v3/c4e4d78d4b3942baa19f426a45d783d0'
+);
+
+//var contractABI = process.env.ContractABI;
+const ContractABI = [
+    {
+       "constant": true,
+       "inputs": [],
+       "name": "totalSupply",
+       "outputs": [
+          {
+             "name": "",
+             "type": "uint256"
+          }
+       ],
+       "payable": false,
+       "stateMutability": "view",
+       "type": "function"
+    },
+    {
+       "constant": true,
+       "inputs": [
+          {
+             "name": "_owner",
+             "type": "address"
+          }
+       ],
+       "name": "balanceOf",
+       "outputs": [
+          {
+             "name": "balance",
+             "type": "uint256"
+          }
+       ],
+       "payable": false,
+       "stateMutability": "view",
+       "type": "function"
+    },
+    {
+       "constant": false,
+       "inputs": [
+          {
+             "name": "_to",
+             "type": "address"
+          },
+          {
+             "name": "_value",
+             "type": "uint256"
+          }
+       ],
+       "name": "transfer",
+       "outputs": [
+          {
+             "name": "",
+             "type": "bool"
+          }
+       ],
+       "payable": false,
+       "stateMutability": "nonpayable",
+       "type": "function"
+    },
+    {
+       "anonymous": false,
+       "inputs": [
+          {
+             "indexed": true,
+             "name": "from",
+             "type": "address"
+          },
+          {
+             "indexed": true,
+             "name": "to",
+             "type": "address"
+          },
+          {
+             "indexed": false,
+             "name": "value",
+             "type": "uint256"
+          }
+       ],
+       "name": "Transfer",
+       "type": "event"
+    }
+ ]
+
+let vc = new web3.eth.Contract(ContractABI, ContractAddress);
+let tokenAdmin = '0x6ceF05eefC7A51B5b7Cd0De37d7B722F12f8259A';
+
 let debug = true;
 
 module.exports = function (app) {
@@ -16,7 +107,7 @@ module.exports = function (app) {
     app.post("/user/check/id", function (req, res) {
         let m_user_id = req.body.user_id;
 
-        db.connetion.query('select user_id from user_info where user_id = ?;',[m_user_id], function (err, rows, fields) {
+        db.connetion.query('select user_id from user_info where user_id = ?;', [m_user_id], function (err, rows, fields) {
             if (debug) {
                 console.log('rows :', rows);
                 console.log('fields :', fields);
@@ -49,7 +140,7 @@ module.exports = function (app) {
     app.post("/user/check/nickname", function (req, res) {
         let m_nickname = req.body.nickname;
 
-        db.connetion.query('select nickname from user_info where nickname = ?;',[m_nickname], function (err, rows, fields) {
+        db.connetion.query('select nickname from user_info where nickname = ?;', [m_nickname], function (err, rows, fields) {
             if (err) {
                 res.send({
                     result_code: 500,
@@ -92,7 +183,7 @@ module.exports = function (app) {
         }
 
         // DB에 저장
-        db.connetion.query('insert into user_info(user_id, nickname, password, wallet_address, email, link_address, game_id) values (?,?,?,?,?, "http://52.78.198.204:3000/' + m_user_id + '",?);',[m_user_id, m_nickname, m_password, m_wallet_address, m_email, m_game_id], function (err, rows, fields) {
+        db.connetion.query('insert into user_info(user_id, nickname, password, wallet_address, email, link_address, game_id) values (?,?,?,?,?, "http://52.78.198.204:3000/' + m_user_id + '",?);', [m_user_id, m_nickname, m_password, m_wallet_address, m_email, m_game_id], async function (err, rows, fields) {
             if (err) {
                 console.log(err);
                 res.send({
@@ -101,6 +192,33 @@ module.exports = function (app) {
                 });
             }
             else {
+                console.log("vc:",vc);
+                vc.methods.transfer(
+                    m_wallet_address,
+                    3,
+                ).call().then(
+                    result => {
+                        console.log('ddd');
+                        
+                    }
+                    //killAmount,
+                    // { from: tokenAdmin, gas: 2000000 }, 
+                    // function (err, result) {
+                    //     if (err) console.log(err);
+                    //     else console.log(result);
+                    // }
+                )
+
+                // await vc.transfer(
+                //     m_wallet_address,
+                //     3,
+                //     //killAmount,
+                //     { from: tokenAdmin, gas: 2000000 }, 
+                //     function (err, result) {
+                //         if (err) console.log(err);
+                //         else console.log(result);
+                //     }
+                // );
                 res.send({
                     result_code: 200,
                     message: '회원가입 성공'
