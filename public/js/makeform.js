@@ -3,7 +3,7 @@
 ////////////////////////////
 ////////////////////////////
 ///////////////////////////////맨 아래 get 미완성
-if (DEBUG) console.log('missionsearch.js');
+if (DEBUG) console.log('makeform.js');
 let vc = web3.eth.contract(ContractABI).at(ContractAddress);
 let tokenAdmin = '0x6ceF05eefC7A51B5b7Cd0De37d7B722F12f8259A';
 //bj account
