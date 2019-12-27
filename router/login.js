@@ -1,6 +1,6 @@
 let db = require('./config')
-const session = require('express-session'); // 로그인 세션 유지를 위해 필요
-const FileStore = require('session-file-store')(session);
+// const session = require('express-session'); // 로그인 세션 유지를 위해 필요
+// const FileStore = require('session-file-store')(session);
 const Web3 = require('web3');
 const ContractAddress = '0x8a493319e470a1fde5c812c726c645772babe95d'; // 토큰 컨트랙트 주소
 const web3 = new Web3(
@@ -96,12 +96,12 @@ let debug = true;
 
 module.exports = function (app) {
 
-    app.use(session({
-        secret: 'dbswnchlrh', // 세션을 암호화해줌. secret 필수 옵션, 노출되면 안 된다
-        resave: false, // 세션을 항상 저장할지 여부를 정하는 값
-        saveUninitialized: true, // 초기화되지 않은 채 스토어에 저장되는 세션. 세션이 필요하기 전까지 세션을 구동시키지 않음
-        store: new FileStore() // 데이터를 저장하는 형식
-    }))
+    // app.use(session({
+    //     secret: 'dbswnchlrh', // 세션을 암호화해줌. secret 필수 옵션, 노출되면 안 된다
+    //     resave: false, // 세션을 항상 저장할지 여부를 정하는 값
+    //     saveUninitialized: true, // 초기화되지 않은 채 스토어에 저장되는 세션. 세션이 필요하기 전까지 세션을 구동시키지 않음
+    //     store: new FileStore() // 데이터를 저장하는 형식
+    // }))
 
     // id 중복 확인
     app.post("/user/check/id", function (req, res) {

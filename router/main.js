@@ -36,10 +36,10 @@ module.exports = function (app) {
       res.render('missioninfo.html')
    });
 
-   // 마이페이지 - 내 정보
-   app.get('/mypage', function (req, res) {
-      res.render('mypage.html')
-   });
+   // // 마이페이지 - 내 정보
+   // app.get('/mypage', function (req, res) {
+   //    res.render('mypage.html')
+   // });
 
    // 마이페이지 - 내 기록
    app.get('/mypage/record/{user_id}', function (req, res) {
