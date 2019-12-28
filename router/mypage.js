@@ -7,7 +7,7 @@ module.exports = function (app) {
         if (!req.session.logined) {
             console.log('if mypage req.session.logined: ', req.session.logined);
             console.log('if mypage req.session.user_id: ', req.session.user_id);
-            res.render('login.html');
+            res.redirect('/login-page');
         }
         else {
             console.log('else mypage req.session.logined: ', req.session.logined);
@@ -64,7 +64,7 @@ module.exports = function (app) {
         if (!req.session.logined) {
             console.log('if mypage req.session.logined: ', req.session.logined);
             console.log('if mypage req.session.user_id: ', req.session.user_id);
-            res.render('login.html');
+            res.redirect('/login-page');
         }
         else {
             console.log('else mypage req.session.logined: ', req.session.logined);

@@ -10,84 +10,84 @@ const web3 = new Web3(
 //var contractABI = process.env.ContractABI;
 const ContractABI = [
     {
-       "constant": true,
-       "inputs": [],
-       "name": "totalSupply",
-       "outputs": [
-          {
-             "name": "",
-             "type": "uint256"
-          }
-       ],
-       "payable": false,
-       "stateMutability": "view",
-       "type": "function"
+        "constant": true,
+        "inputs": [],
+        "name": "totalSupply",
+        "outputs": [
+            {
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
     },
     {
-       "constant": true,
-       "inputs": [
-          {
-             "name": "_owner",
-             "type": "address"
-          }
-       ],
-       "name": "balanceOf",
-       "outputs": [
-          {
-             "name": "balance",
-             "type": "uint256"
-          }
-       ],
-       "payable": false,
-       "stateMutability": "view",
-       "type": "function"
+        "constant": true,
+        "inputs": [
+            {
+                "name": "_owner",
+                "type": "address"
+            }
+        ],
+        "name": "balanceOf",
+        "outputs": [
+            {
+                "name": "balance",
+                "type": "uint256"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
     },
     {
-       "constant": false,
-       "inputs": [
-          {
-             "name": "_to",
-             "type": "address"
-          },
-          {
-             "name": "_value",
-             "type": "uint256"
-          }
-       ],
-       "name": "transfer",
-       "outputs": [
-          {
-             "name": "",
-             "type": "bool"
-          }
-       ],
-       "payable": false,
-       "stateMutability": "nonpayable",
-       "type": "function"
+        "constant": false,
+        "inputs": [
+            {
+                "name": "_to",
+                "type": "address"
+            },
+            {
+                "name": "_value",
+                "type": "uint256"
+            }
+        ],
+        "name": "transfer",
+        "outputs": [
+            {
+                "name": "",
+                "type": "bool"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
     },
     {
-       "anonymous": false,
-       "inputs": [
-          {
-             "indexed": true,
-             "name": "from",
-             "type": "address"
-          },
-          {
-             "indexed": true,
-             "name": "to",
-             "type": "address"
-          },
-          {
-             "indexed": false,
-             "name": "value",
-             "type": "uint256"
-          }
-       ],
-       "name": "Transfer",
-       "type": "event"
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": true,
+                "name": "from",
+                "type": "address"
+            },
+            {
+                "indexed": true,
+                "name": "to",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "name": "value",
+                "type": "uint256"
+            }
+        ],
+        "name": "Transfer",
+        "type": "event"
     }
- ]
+]
 
 let vc = new web3.eth.Contract(ContractABI, ContractAddress);
 let tokenAdmin = '0x6ceF05eefC7A51B5b7Cd0De37d7B722F12f8259A';
@@ -192,14 +192,14 @@ module.exports = function (app) {
                 });
             }
             else {
-                console.log("vc:",vc);
+                console.log("vc:", vc);
                 vc.methods.transfer(
                     m_wallet_address,
                     3,
                 ).call().then(
                     result => {
                         console.log('ddd');
-                        
+
                     }
                     //killAmount,
                     // { from: tokenAdmin, gas: 2000000 }, 
@@ -269,10 +269,9 @@ module.exports = function (app) {
     });
 
     // 로그아웃
-    app.post("/user/logout", function (res) {
-        res.send({
-            result_code: 200,
-            message: '회원가입 성공'
+    app.get('/user/logout', function (req, res) {
+        req.session.destroy(function (err) {
+            res.redirect('/');
         });
     });
 
