@@ -3,7 +3,7 @@ console.log('logout.js');
 $(document).ready(function() {
   $('#logout_button').on('click', function() {
     //DB에 post
-    $.delete('/user/logout', {}, function(data) {
+    $.get('/user/logout', {}, function(data) {
       console.log('logout_button : ', data);
     }); // end of post
   }); //end of button
