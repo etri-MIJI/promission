@@ -30,109 +30,7 @@
     <link rel="stylesheet" href="css/slicknav.css" />
     <link rel="stylesheet" href="css/style.css" />
     <!-- <link rel="stylesheet" href="css/responsive.css"> -->
-    <script>
-      $(document).ready(function() {
-        let DEBUG = 1
-        let privateKey = 'Ky2VG2TmERTXq5Cv7zk6fyhduv65ejnFx7fqi47vVyVPhnwVGCKP'
-        let client = new CoinStack(
-          'c7dbfacbdf1510889b38c01b8440b1',
-          '10e88e9904f29c98356fd2d12b26de',
-          'c3sp2.blocko.io',
-          'https'
-        )
-
-        if (DEBUG) {
-          console.log('client: ', client)
-          console.log('starting...')
-        }
-
-        $('#newSend').on('click', function() {
-          let toaccount = $('#i_address').val()
-          let fromaccount = $('#to_address').val()
-          let coin = $('#coin').val()
-
-          let txBuilder = client.createTransactionBuilder()
-          txBuilder.addOutput(toaccount, CoinStack.Math.toSatoshi(coin))
-          txBuilder.setInput(fromaccount)
-          txBuilder.buildTransaction(function(err, tx) {
-            try {
-              tx.sign(privateKey)
-
-              let rawTx = tx.serialize()
-              client.sendTransaction(rawTx, function(err) {
-                if (!err) {
-                  console.log('definition: ', tx.getHash())
-                  alert('거래가 완료 되었습니다..!!!')
-                }
-              })
-            } catch (e) {
-              console.log(e)
-            } //end of try
-          }) // end of txbuilder
-        })
-
-        $('#newBalance').on('click', function() {
-          let addr = $('#i_address').val
-          client.getBalance(addr, function(err, balance) {
-            if (!err) {
-              var total = CoinStack.Math.toBitcoin(balance)
-
-              $('#i_balance').val(total)
-
-              $('#message').text(' total: ' + total)
-              console.log('address: ', addr)
-              console.log('total: ', total)
-            } // end of if
-          })
-        })
-        $('#newAccount').on('click', function() {
-          let privateKey = CoinStack.ECKey.createKey()
-          if (DEBUG) console.log('privateKey : ', privateKey)
-
-          let account = CoinStack.ECKey.deriveAddress(privateKey)
-          if (DEBUG) console.log('account: ', account)
-
-          $('#i_address').val(account)
-
-          $('#message').text(' account: ' + account)
-          alert('Account 생성이 완료 되었습니다..!!!' + account)
-          // $('#i_password').val(privateKey);
-          // <input id="myField" type="text" name="email"/>
-          // getting the value
-          // let email = $("#myField").val();
-          // setting the value<h5>송신처  <input id="i_address" size="45" placeholder=""></input> </h5>
-        })
-        // $("#myField").val( "new value here" );
-        //
-      })
-    </script>
-    <script>
-      $(document).ready(function(){
-      
-        let DEBUG = 1;
-      
-        let qrcode = new QRCode(document.getElementById("qrcode"), {
-        width : 250,
-        height : 250
-        });
-      
-        function makeCode () {		
-        let elText = document.getElementById("fromaddress");
-        
-        if (!elText.value) {
-          alert("Input a text");
-          elText.focus();
-          return;
-        }
-        qrcode.makeCode(elText.value);
-        } 
-        
-        $('#qrcodeBtn').on('click', function(){
-          if (DEBUG) console.log("qrcodeBtn...... ");
-           makeCode();   
-          }) // end of txbuilder
-      })
-      </script>
+    
   </head>
 
   <body>
@@ -181,7 +79,7 @@
               </div>
               <div class="col-xl-3 col-lg-3 d-none d-lg-block">
                 <div class="get_in_tauch">
-                  <a href="/user/logout" class="boxed-btn">로그아웃</a>
+                                   <a href="/user/logout" class="boxed-btn">로그아웃</a>
                 </div>
               </div>
               <div class="col-12">
@@ -209,9 +107,9 @@
     <div class="container theme-showcase" role="main">
       <br><br>
       <div id="tablePlace"></div>
-    <button id="qrcodeBtn"> Create QRCode </button><br><br><br>
-      
-          <div id="message" style="text-align: center;">
+      <h3>내 계좌 QRcode</h3>
+    <br><br><br>     
+          <div id="message" style="text-align: center;"></div>
       <div id="qrcode"></div>
   </div>
   <div id="tablePlace"></div>
@@ -219,22 +117,16 @@
   
 
     <br /><br>
-    <input class="r" type="text" value="13isWyA23uSfTnGqRDM3n4famvybaQkL6B" id="fromaddress" placeholder="본인 전자지갑 주소"></input>
-    <button id="btn1" class="e">복사</button><br /><br />
-    <input
-      class="r"
-      type="text"
-      id="mission_search"
-      placeholder="미션 신청서 생성 링크"
-    />
-    <button id="btn2" class="e">복사</button><br /><br /><br /><br />
+    <input class="r" type="text" value="13isWyA23uSfTnGqRDM3n4famvybaQkL6B" id="myaccount" readonly ></input>
+    <button id="account_copy" class="e">복사</button><br /><br />
+    <input class="r" type="text" id="missionlink" value="링크 줘야합니다" readonly/>
+    <button id="link_copy" class="e">복사</button><br /><br /><br /><br />
 
-    <a href="/user/password/change"
-      ><button id="changepassword_button" class="boxed-btn">
+    <a href="/user/password/change">
+      <button id="changepassword_button" class="boxed-btn">
         비밀번호 변경
-      </button></a
-    >
-    <button id="out" class="boxed-btn">회원 탈퇴</button>
+      </button></a>
+    <button id="deleteMem_button" class="boxed-btn">회원 탈퇴</button>
     <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
 
     <!-- JS here -->
@@ -255,6 +147,7 @@
     <script src="js/jquery.slicknav.min.js"></script>
     <script src="js/jquery.magnific-popup.min.js"></script>
     <script src="js/plugins.js"></script>
+    
 
     <!--contact js-->
     <script src="js/contact.js"></script>
@@ -262,7 +155,7 @@
     <script src="js/jquery.form.js"></script>
     <script src="js/jquery.validate.min.js"></script>
     <script src="js/mail-script.js"></script>
-
     <script src="js/main.js"></script>
+    <script src="js/mypage.js"></script>
   </body>
 </html>
