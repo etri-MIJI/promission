@@ -148,7 +148,7 @@ $(document).ready(function() {
 
       //DB에 post
       $.post(
-        '/submit/mission',
+        '/mission/submit',
         {
           user_id: id,
           mission_tx: transactionHash,
