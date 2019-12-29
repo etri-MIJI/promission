@@ -7,16 +7,36 @@ if (DEBUG) console.log('makeform.js');
 let vc = web3.eth.contract(ContractABI).at(ContractAddress);
 let tokenAdmin = '0x6ceF05eefC7A51B5b7Cd0De37d7B722F12f8259A';
 //bj account
-let wallet_address = '';
 
 $(document).ready(function() {
+  let user_id = '';
+  let wallet_address = '';
+
+  test();
   //web3 연동
   if (web3.isConnected()) {
     console.log('connected');
   } else {
     console.log('not connected');
   }
-
+  // $.get('/get/:user_id', {}, function(data) {
+  //   console.log(data);
+  // });
+  // $.get('/:user_id', {}, function(data) {
+  //   var id = JSON.parse(#{data.id});
+  //   console.log(id);
+  // })
+  //////////////////////////////////////test
+  function test() {
+    let sentence = document.getElementById('formplace');
+    sentence.value = window.document.location.href;
+    console.log('sentence', sentence.value);
+    sentence = sentence.value;
+    console.log('sentence', sentence);
+    let test = sentence.split('/');
+    user_id = test[3].toString();
+    console.log('user_id', user_id);
+  }
   //계좌 불러오는 함수 먼저 실행
   account_view();
 
@@ -68,6 +88,8 @@ $(document).ready(function() {
     let missionType = $(':input:radio[name=formtype]:checked').val();
     let myAccount = document.getElementById('myAccountId').value;
     let transactionHash = '';
+
+    if (missionType == undefined) alert('타입을 선택하여 주십시오');
 
     if (DEBUG) {
       console.log('account:', account);
@@ -145,32 +167,39 @@ $(document).ready(function() {
     function sendTransaction(a) {
       let transactionHash = a;
       console.log('transactionHash:', transactionHash);
-
-      //DB에 post
+      //////////////////////////////////////////////////
+      // DB에 post
       $.post(
         '/mission/submit',
         {
-          user_id: id,
+          user_id: user_id,
           mission_tx: transactionHash,
           mission_type: missionType,
         },
         function(data) {
-          console.log('missionform_post : ', data);
+          if (DEBUG) {
+            console.log('missionform_post : ', data);
+            console.log('data message:', data.message);
+          }
         }
       ); // end of post
       alert('미션 신청에 성공하였습니다.\n미션 트랜잭션 주소는' + transactionHash + '입니다.');
+
       location.replace('/');
     } //end of sendTransaction()
   }); //end of $('#missionSubmit').on('click',function(){
 
   //미션폼-지갑주소API
-  $.get('/wallet-address/' + id, function(data) {
+  $.get('/wallet-address/' + user_id, function(data) {
     if (data.result_code == 200) {
       ///id를 어떻게 알아내죵
       wallet_address = data.message;
+      $('#accountId').val(wallet_address);
       if (DEBUG) {
         console.log(data);
         console.log(wallet_address);
+      } else {
+        console.log(data.message);
       }
     }
   }); // end of get
