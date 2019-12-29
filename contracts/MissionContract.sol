@@ -39,7 +39,7 @@ contract MissionContract {
     function setInstructorRank(address _address, address _BJaddress, uint _rank, uint _rankAmount) public {
         var rankInstructor = rankStructs[_address];
 
-        rankInstructor.rankBJaddress = _BJaddress;
+        rankInstructor.RankBJaddress = _BJaddress;
         rankInstructor.rank = _rank;
         rankInstructor.rankAmount = _rankAmount;
         
