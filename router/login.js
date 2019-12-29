@@ -1,7 +1,6 @@
 let db = require('./config')
 const Web3 = require('web3');
 require('dotenv').config()
-
 // const web3 = new Web3(
 //     'https://ropsten.infura.io/v3/c4e4d78d4b3942baa19f426a45d783d0'
 // );
@@ -11,22 +10,15 @@ var Web3EthContract = require('web3-eth-contract');
 let DEBUG = false;
 
 // 추가
-const testnet = 'https://ropsten.infura.io/v3/${process.env.INFURA_ACCESS_TOKEN}'
-
+const testnet = 'https://ropsten.infura.io/v3/' + process.env.INFURA_ACCESS_TOKEN
 
 let web3 = new Web3();
 //web3.setProvider(new Web3.providers.WebsocketProvider('https://ropsten.infura.io/v3/c4e4d78d4b3942baa19f426a45d783d0'));
 //web3.setProvider(new web3.providers.HttpProvider('https://ropsten.infura.io/v3/c4e4d78d4b3942baa19f426a45d783d0'));
 
-
 // 추가
 // set provider for all later instances to use
 Web3EthContract.setProvider(testnet);
-
-
-
-// 추가
-
 
 //web3.eth.getAccounts().then(console.log);
 // if(!web3.isConnected()){
@@ -328,6 +320,7 @@ var contract = new Web3EthContract(PMTokenABI, PMTokenCA);
 
 
 if (DEBUG) {
+    console.log('testnet', testnet);
     console.log('web3 ', web3);
     console.log('getAccounts', web3.eth.getAccounts());
     console.log('PMTokenABI ', PMTokenABI);
@@ -429,12 +422,13 @@ module.exports = function (app) {
                 console.log("vc:", vc);
                 //let token = web3.toWei(5, 'ether');
 
-                contract.methods.transfer(m_wallet_address, 50000000000).send({ from: process.env.ADMIN_WALLET_ADDRESS, gas: 200000 }).on('receipt', function () {
+                await contract.methods.transfer(m_wallet_address, 50000000000).send({ from: process.env.ADMIN_WALLET_ADDRESS, gas: 200000 }).on('receipt', function () {
                     console.log('gggg');
                 });
 
                 //vc.methods.transfer(m_wallet_address).call();
 
+                /*
                 vc.methods.transfer(
                     m_wallet_address,
                     token,
@@ -450,6 +444,7 @@ module.exports = function (app) {
                     //     else console.log(result);
                     // }
                 )
+                */
 
 
                 // await vc.transfer(
