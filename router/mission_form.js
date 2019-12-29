@@ -13,19 +13,6 @@ router.get('/user', function(req, res, next) {
         res.render('makeform.html');
     });
 
-    app.get('/get/:user_id', function (req, res) {
-        m_user_id = req.params.user_id;
-        db.connetion.query('select user_id from user_info where user_id=?', [m_user_id], function (err, rows, fields) {
-            if (err) {
-
-            }
-            res.send({
-                result_code: 200,
-                message: rows[0].user_id
-            })
-        });
-    });
-
     // 각 유저의 미션폼에서 지갑 주소를 보내준다
     app.get('/wallet-address/:user_id', function (req, res) {
         m_user_id = req.params.user_id;

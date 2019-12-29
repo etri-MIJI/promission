@@ -18,6 +18,7 @@ app.use(session({
 
 let router = require('./router/main')(app); // /router/main을 연결시킨 것
 let login = require('./router/login')(app)
+let mission_form = require('./router/mission_form')(app)
 let mission_link = require('./router/mission_link')(app)
 let mission_result = require('./router/mission_result')(app)
 let mypage = require('./router/mypage')(app)
