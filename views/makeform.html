@@ -9,7 +9,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script src="js/vendor/jquery-1.12.4.min.js"></script>
     <script src="/js/formType.js"></script>
-
+    <script src="contracts/contractabi.js"></script>
+    <script src="contracts/contractaddress.js"></script>
     <!-- <link rel="manifest" href="site.webmanifest"> -->
     <link rel="shortcut icon" type="image/x-icon" href="img/favicon.png" />
     <!-- Place favicon.ico in the root directory -->
@@ -100,15 +101,14 @@
     받는사람 계좌 <input type="text" id="accountId" class="b" readonly ><br><br>
     본인 계좌 <input type="text" id="myAccountId" class="b" readonly>
     <br><br><br>
-    <input type="radio" id="formtype1" name="formtype" value=1 checked/>타입1
+    <input type="radio" id="formtype1" name="formtype" value=1 />타입1
     <input type="radio" id="formtype2" name="formtype" value=2 />타입2
     <br><br><hr>
     <div id="formplace"></div>
     <button id="missionSubmit" class="boxed-btn">미션 제출</button>
     <button id="missioncancel" class="boxed-btn">미션 취소</button>
-    
+    <p id="Hashcopy"></p>
   </body>
-  
     <br><br>
 
     <!-- JS here -->
@@ -137,8 +137,6 @@
     <script src="js/jquery.validate.min.js"></script>
     <script src="js/mail-script.js"></script>
     <script src="js/main.js"></script>
-    <script type="text/javascript" src="/contracts/contractabi.js"></script>
-    <script type="text/javascript" src="/contracts/contractaddress.js"></script>
     <script src="/js/makeform.js"></script>
     
   </body>
