@@ -31,13 +31,6 @@ $(document).ready(function() {
 
   //미션신청시 저장 및 관리자계정으로 예치금보내기
   $('#applyBtnKill').click(function() {
-    // let killAmount = document.getElementById('killAmount').value;
-    // let token = web3.toWei(killAmount, 'ether');
-
-    // console.log('tokenAdmin :', tokenAdmin_);
-    // console.log('MIN :', MIN);
-    // console.log('token :', token);
-
     saveKillMission();
   });
 
