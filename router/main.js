@@ -35,4 +35,12 @@ module.exports = function (app) {
    app.get('/mission-info-page', function (req, res) {
       res.render('missioninfo.html')
    });
+
+   app.get('/mypage1', function(req, res){
+      res.render('mypage.html');
+   })
+
+   app.get('/mypage2', function(req, res){
+      res.render('missionlist.html');
+   })
 }
