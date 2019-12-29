@@ -11,7 +11,11 @@ $(document).ready(function() {
       },
       function(data) {
         console.log('resetpassword_button : ', data);
+        if (data.result_code == 200) {
+          alert(data.message);
+          location.replace('/');
+        }
       }
-    ); // end of post
-  }); //end of login_button click
+    ); // end of put
+  }); //end of resetpassword_sendbutton
 });
