@@ -19,9 +19,11 @@ $(document).ready(function() {
       },
       function(data) {
         console.log('change_password : ', data);
+        if (data.result_code == 200) {
+          alert(data.message);
+          location.replace('/');
+        }
       }
-    ); // end of post
-  }); //end of login_button click
-
-  //   $.get('/login-page', {}, function(data) {});
+    ); // end of put
+  }); //end of changepassword_button
 });
