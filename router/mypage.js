@@ -12,7 +12,8 @@ module.exports = function (app) {
         else {
             console.log('else mypage req.session.logined: ', req.session.logined);
             console.log('else mypage req.session.user_id: ', req.session.user_id);
-            res.render('mypage.html');
+            //res.render('mypage.html');
+            res.redirect('/mypage1');
         }
         //res.render('mypage.html');
     });
@@ -69,7 +70,8 @@ module.exports = function (app) {
         else {
             console.log('else mypage req.session.logined: ', req.session.logined);
             console.log('else mypage req.session.user_id: ', req.session.user_id);
-            res.render('missionlist.html');
+            res.redirect('/mypage2');
+            //res.render('missionlist.html');
         }
     });
 
@@ -112,9 +114,6 @@ module.exports = function (app) {
         });
     });
 
-//     UPDATE Customers
-// SET ContactName = 'Alfred Schmidt', City= 'Frankfurt'
-// WHERE CustomerID = 1;
     // 미션 수락/거절
     app.post('/mission/accept', function (req, res){
         let m_mission_tx = req.body.mission_tx;
@@ -168,6 +167,8 @@ module.exports = function (app) {
                 });
                 return;
             }
+
+            // 미션이 종료되면 전적페이지와 미션내용을 비교한다.
 
             res.send({
                 result_code: 200,
