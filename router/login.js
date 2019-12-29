@@ -1,114 +1,324 @@
 let db = require('./config')
-// const session = require('express-session'); // 로그인 세션 유지를 위해 필요
-// const FileStore = require('session-file-store')(session);
 const Web3 = require('web3');
-const ContractAddress = '0x8a493319e470a1fde5c812c726c645772babe95d'; // 토큰 컨트랙트 주소
-const web3 = new Web3(
-    'https://ropsten.infura.io/v3/c4e4d78d4b3942baa19f426a45d783d0'
-);
+// const web3 = new Web3(
+//     'https://ropsten.infura.io/v3/c4e4d78d4b3942baa19f426a45d783d0'
+// );
+let DEBUG = false;
 
-//var contractABI = process.env.ContractABI;
-const ContractABI = [
-    {
-        "constant": true,
-        "inputs": [],
-        "name": "totalSupply",
-        "outputs": [
-            {
-                "name": "",
-                "type": "uint256"
-            }
-        ],
-        "payable": false,
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "constant": true,
-        "inputs": [
-            {
-                "name": "_owner",
-                "type": "address"
-            }
-        ],
-        "name": "balanceOf",
-        "outputs": [
-            {
-                "name": "balance",
-                "type": "uint256"
-            }
-        ],
-        "payable": false,
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "constant": false,
-        "inputs": [
-            {
-                "name": "_to",
-                "type": "address"
-            },
-            {
-                "name": "_value",
-                "type": "uint256"
-            }
-        ],
-        "name": "transfer",
-        "outputs": [
-            {
-                "name": "",
-                "type": "bool"
-            }
-        ],
-        "payable": false,
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "anonymous": false,
-        "inputs": [
-            {
-                "indexed": true,
-                "name": "from",
-                "type": "address"
-            },
-            {
-                "indexed": true,
-                "name": "to",
-                "type": "address"
-            },
-            {
-                "indexed": false,
-                "name": "value",
-                "type": "uint256"
-            }
-        ],
-        "name": "Transfer",
-        "type": "event"
-    }
-]
+let web3 = new Web3();
+web3.setProvider(new Web3.providers.WebsocketProvider('https://ropsten.infura.io/v3/c4e4d78d4b3942baa19f426a45d783d0'));
+//web3.setProvider(new web3.providers.HttpProvider('https://ropsten.infura.io/v3/c4e4d78d4b3942baa19f426a45d783d0'));
 
-let vc = new web3.eth.Contract(ContractABI, ContractAddress);
+console.log('web3 ', web3);
+//web3.eth.getAccounts().then(console.log);
+console.log('getAccounts',web3.eth.getAccounts());
+if(!web3.isConnected()){
+    console.log('web3.isConnected is failed');
+    //throw new Error('unable to connect to ethereum node at ' + infuraUri);
+} else {
+    console.log('web3.isConeected!');
+}
+
+const PMTokenCA = '0xf9de7b53546cdcf5192f2f5a20d3dcd7c91f71eb';
+const PMTokenABI = [
+    {
+        constant: false,
+        inputs: [
+            {
+                name: '_spender',
+                type: 'address',
+            },
+            {
+                name: '_value',
+                type: 'uint256',
+            },
+        ],
+        name: 'approve',
+        outputs: [
+            {
+                name: '',
+                type: 'bool',
+            },
+        ],
+        payable: false,
+        stateMutability: 'nonpayable',
+        type: 'function',
+    },
+    {
+        constant: false,
+        inputs: [
+            {
+                name: '_spender',
+                type: 'address',
+            },
+            {
+                name: '_subtractedValue',
+                type: 'uint256',
+            },
+        ],
+        name: 'decreaseApproval',
+        outputs: [
+            {
+                name: '',
+                type: 'bool',
+            },
+        ],
+        payable: false,
+        stateMutability: 'nonpayable',
+        type: 'function',
+    },
+    {
+        constant: false,
+        inputs: [
+            {
+                name: '_spender',
+                type: 'address',
+            },
+            {
+                name: '_addedValue',
+                type: 'uint256',
+            },
+        ],
+        name: 'increaseApproval',
+        outputs: [
+            {
+                name: '',
+                type: 'bool',
+            },
+        ],
+        payable: false,
+        stateMutability: 'nonpayable',
+        type: 'function',
+    },
+    {
+        constant: false,
+        inputs: [
+            {
+                name: '_to',
+                type: 'address',
+            },
+            {
+                name: '_value',
+                type: 'uint256',
+            },
+        ],
+        name: 'transfer',
+        outputs: [
+            {
+                name: '',
+                type: 'bool',
+            },
+        ],
+        payable: false,
+        stateMutability: 'nonpayable',
+        type: 'function',
+    },
+    {
+        constant: false,
+        inputs: [
+            {
+                name: '_from',
+                type: 'address',
+            },
+            {
+                name: '_to',
+                type: 'address',
+            },
+            {
+                name: '_value',
+                type: 'uint256',
+            },
+        ],
+        name: 'transferFrom',
+        outputs: [
+            {
+                name: '',
+                type: 'bool',
+            },
+        ],
+        payable: false,
+        stateMutability: 'nonpayable',
+        type: 'function',
+    },
+    {
+        inputs: [],
+        payable: false,
+        stateMutability: 'nonpayable',
+        type: 'constructor',
+    },
+    {
+        anonymous: false,
+        inputs: [
+            {
+                indexed: true,
+                name: 'owner',
+                type: 'address',
+            },
+            {
+                indexed: true,
+                name: 'spender',
+                type: 'address',
+            },
+            {
+                indexed: false,
+                name: 'value',
+                type: 'uint256',
+            },
+        ],
+        name: 'Approval',
+        type: 'event',
+    },
+    {
+        anonymous: false,
+        inputs: [
+            {
+                indexed: true,
+                name: 'from',
+                type: 'address',
+            },
+            {
+                indexed: true,
+                name: 'to',
+                type: 'address',
+            },
+            {
+                indexed: false,
+                name: 'value',
+                type: 'uint256',
+            },
+        ],
+        name: 'Transfer',
+        type: 'event',
+    },
+    {
+        constant: true,
+        inputs: [
+            {
+                name: '_owner',
+                type: 'address',
+            },
+            {
+                name: '_spender',
+                type: 'address',
+            },
+        ],
+        name: 'allowance',
+        outputs: [
+            {
+                name: '',
+                type: 'uint256',
+            },
+        ],
+        payable: false,
+        stateMutability: 'view',
+        type: 'function',
+    },
+    {
+        constant: true,
+        inputs: [
+            {
+                name: '_owner',
+                type: 'address',
+            },
+        ],
+        name: 'balanceOf',
+        outputs: [
+            {
+                name: 'balance',
+                type: 'uint256',
+            },
+        ],
+        payable: false,
+        stateMutability: 'view',
+        type: 'function',
+    },
+    {
+        constant: true,
+        inputs: [],
+        name: 'decimals',
+        outputs: [
+            {
+                name: '',
+                type: 'uint8',
+            },
+        ],
+        payable: false,
+        stateMutability: 'view',
+        type: 'function',
+    },
+    {
+        constant: true,
+        inputs: [],
+        name: 'INITIAL_SUPPLY',
+        outputs: [
+            {
+                name: '',
+                type: 'uint256',
+            },
+        ],
+        payable: false,
+        stateMutability: 'view',
+        type: 'function',
+    },
+    {
+        constant: true,
+        inputs: [],
+        name: 'name',
+        outputs: [
+            {
+                name: '',
+                type: 'string',
+            },
+        ],
+        payable: false,
+        stateMutability: 'view',
+        type: 'function',
+    },
+    {
+        constant: true,
+        inputs: [],
+        name: 'symbol',
+        outputs: [
+            {
+                name: '',
+                type: 'string',
+            },
+        ],
+        payable: false,
+        stateMutability: 'view',
+        type: 'function',
+    },
+    {
+        constant: true,
+        inputs: [],
+        name: 'totalSupply',
+        outputs: [
+            {
+                name: '',
+                type: 'uint256',
+            },
+        ],
+        payable: false,
+        stateMutability: 'view',
+        type: 'function',
+    },
+];
+let vc = new web3.eth.Contract(PMTokenABI, PMTokenCA);
 let tokenAdmin = '0x6ceF05eefC7A51B5b7Cd0De37d7B722F12f8259A';
 
-let debug = true;
+if (DEBUG) {
+    console.log('PMTokenABI ', PMTokenABI);
+    console.log('PMTokenCA ', PMTokenCA);
+}
 
 module.exports = function (app) {
-
-    // app.use(session({
-    //     secret: 'dbswnchlrh', // 세션을 암호화해줌. secret 필수 옵션, 노출되면 안 된다
-    //     resave: false, // 세션을 항상 저장할지 여부를 정하는 값
-    //     saveUninitialized: true, // 초기화되지 않은 채 스토어에 저장되는 세션. 세션이 필요하기 전까지 세션을 구동시키지 않음
-    //     store: new FileStore() // 데이터를 저장하는 형식
-    // }))
 
     // id 중복 확인
     app.post("/user/check/id", function (req, res) {
         let m_user_id = req.body.user_id;
 
         db.connetion.query('select user_id from user_info where user_id = ?;', [m_user_id], function (err, rows, fields) {
-            if (debug) {
+            if (DEBUG) {
                 console.log('rows :', rows);
                 console.log('fields :', fields);
             }
@@ -173,7 +383,7 @@ module.exports = function (app) {
         let m_email = req.body.email;
         let m_game_id = req.body.game_id;
 
-        if (debug) {
+        if (DEBUG) {
             console.log("user_id", m_user_id);
             console.log("m_nickname", m_nickname);
             console.log("m_password", m_password);
@@ -192,10 +402,15 @@ module.exports = function (app) {
                 });
             }
             else {
+                // 회원가입 성공 시 토큰 전송
                 console.log("vc:", vc);
+                let token = web3.toWei(5, 'ether');
+
+                //vc.methods.transfer(m_wallet_address).call();
+                
                 vc.methods.transfer(
                     m_wallet_address,
-                    3,
+                    token,
                 ).call().then(
                     result => {
                         console.log('ddd');
@@ -208,6 +423,7 @@ module.exports = function (app) {
                     //     else console.log(result);
                     // }
                 )
+                
 
                 // await vc.transfer(
                 //     m_wallet_address,
@@ -234,7 +450,6 @@ module.exports = function (app) {
 
         // DB에 저장된 내용과 비교
         db.connetion.query('select user_id, password from user_info where user_id = ? and password = ?;', [m_user_id, m_password], function (err, rows) {
-            //console.log("rows ",rows[0]);
             if (err) {
                 console.log(err);
                 res.send({
@@ -244,7 +459,6 @@ module.exports = function (app) {
             }
             else {
                 if (rows.length > 0) {
-                    //console.log(rows[0]);
                     // 세션 데이터 저장
                     req.session.logined = true;
                     req.session.user_id = m_user_id;
@@ -255,7 +469,6 @@ module.exports = function (app) {
                             result_code: 200,
                             message: "로그인 성공"
                         });
-                        //res.redirect('/');
                     });
                 }
                 else {
