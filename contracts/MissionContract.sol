@@ -1,16 +1,16 @@
 pragma solidity ^0.4.25;
 
-import "./PMToken.sol";
-
-contract MissionContract is SimpleToken {
+contract MissionContract {
     address contractOwner;
     
     struct killStruct {
+      address KillBJaddress; 
       uint Kill; //몇 킬 이상시
       uint killAmount; //보낼 토큰의 양입니다. 
     }
 
     struct rankStrcut {
+        address RankBJaddress; 
         uint rank; //몇 등시
         uint rankAmount;
     }
@@ -25,9 +25,10 @@ contract MissionContract is SimpleToken {
     }
     
     //킬미션 신청자의 주소와 신청내용을 저장합니다.
-    function setInstructorKill(address _address, uint _Kill, uint _killAmount) public {
+    function setInstructorKill(address _address, address _BJaddress, uint _Kill, uint _killAmount) public {
         var killInstructor = killStructs[_address];
 
+        killInstructor.KillBJaddress = _BJaddress;
         killInstructor.Kill = _Kill;
         killInstructor.killAmount = _killAmount;
         
@@ -35,9 +36,10 @@ contract MissionContract is SimpleToken {
     }
 
     //등수미션 신청자의 주소와 신청내용을 저장합니다.
-    function setInstructorRank(address _address, uint _rank, uint _rankAmount) public {
+    function setInstructorRank(address _address, address _BJaddress, uint _rank, uint _rankAmount) public {
         var rankInstructor = rankStructs[_address];
 
+        rankInstructor.RankBJaddress = _BJaddress;
         rankInstructor.rank = _rank;
         rankInstructor.rankAmount = _rankAmount;
         
@@ -50,13 +52,13 @@ contract MissionContract is SimpleToken {
     }
     
      //킬미션 신청자의 주소를 입력하면 신청내용을 호출합니다.
-    function getInstructorKill(address _address) view public returns (uint, uint) {
-        return (killStructs[_address].Kill, killStructs[_address].killAmount);
+    function getInstructorKill(address _address) view public returns (address, uint, uint) {
+        return (killStructs[_address].KillBJaddress, killStructs[_address].Kill, killStructs[_address].killAmount);
     }
 
     //등수미션 신청자의 주소를 입력하면 신청내용을 호출합니다.
-    function getInstructorRank(address _address) view public returns (uint, uint) {
-        return (rankStructs[_address].rank, rankStructs[_address].rankAmount);
+    function getInstructorRank(address _address) view public returns (address, uint, uint) {
+        return (rankStructs[_address].RankBJaddress, rankStructs[_address].rank, rankStructs[_address].rankAmount);
     }
     
     //컨트랙트를 삭제합니다.
