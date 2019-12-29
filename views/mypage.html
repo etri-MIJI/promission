@@ -109,7 +109,7 @@
       <div id="tablePlace"></div>
       <h3>내 계좌 QRcode</h3>
     <br><br><br>     
-          <div id="message" style="text-align: center;"></div>
+          <div id="message"></div>
       <div id="qrcode"></div>
   </div>
   <div id="tablePlace"></div>
@@ -117,10 +117,25 @@
   
 
     <br /><br>
-    <input class="r" type="text" value="13isWyA23uSfTnGqRDM3n4famvybaQkL6B" id="myaccount" readonly ></input>
-    <button id="account_copy" class="e">복사</button><br /><br />
-    <input class="r" type="text" id="missionlink" value="링크 줘야합니다" readonly/>
-    <button id="link_copy" class="e">복사</button><br /><br /><br /><br />
+    <center>
+    <table>
+      <tr>
+        <td colspan="2"><h3>나의 계좌 주소</h3></td>
+      </tr>
+      <tr>
+        <td>
+          <input class="r" type="text" id="myaccount" readonly ></td>
+        <td><button id="account_copy" class="e">복사</button></td></tr>
+      <tr>
+        <td colspan="2"><h3>나의 미션지 주소</h3></td></tr>
+      <tr>
+        <td><input class="r" type="text" id="missionlink" readonly></td><td> <button id="link_copy" class="e">복사</button></td>
+      </tr>
+     </table></center>
+
+     <br /><br /><br /><br />
+
+    
 
     <a href="/user/password/change">
       <button id="changepassword_button" class="boxed-btn">
@@ -157,5 +172,6 @@
     <script src="js/mail-script.js"></script>
     <script src="js/main.js"></script>
     <script src="js/mypage.js"></script>
+    
   </body>
 </html>
