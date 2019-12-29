@@ -15,23 +15,25 @@ $(document).ready(function() {
       let row = table.insertRow();
       let cell1 = row.insertCell(0);
       let cell2 = row.insertCell(1);
-      // let cell3 = row.insertCell(2);
-      // let cell4 = row.insertCell(3);
-      cell1.innerHTML = data.list[i].nickname;
-      cell2.innerHTML = data.list[i].link_address;
+      let cell3 = row.insertCell(2);
+
+      cell1.innerHTML = i + 1;
+      cell2.innerHTML = data.list[i].nickname;
+      cell3.innerHTML = data.list[i].link_address;
     }
   }); //end of $.get('/link-page/list', function(data)
 
   $('#nick_search').on('click', function() {
-    let id = $('#nickname').val();
+    let nick = $('#nickname').val();
 
-    if (DEBUG) console.log('id:', id);
+    if (DEBUG) console.log('nick:', nick);
 
     //DB로 닉네임 url이용하여 GET
-    $.get('/link-page/search/' + id, function(data) {
+    $.get('/link-page/search/' + nick, function(data) {
       //let m = data[0].title;
       //console.log('data[0].title : ', m);
       let table = document.getElementById('linkTable');
+      table.innerHTML = '<tr><td>순번</td><td>닉네임</td><td>미션지 주소</td></tr>';
       let length = data.list.length;
       //clearTable();
       console.log('data : ', data);
@@ -39,12 +41,11 @@ $(document).ready(function() {
         let row = table.insertRow();
         let cell1 = row.insertCell(0);
         let cell2 = row.insertCell(1);
-        // let cell3 = row.insertCell(2);
-        // let cell4 = row.insertCell(3);
-        cell1.innerHTML = data.list[i].nickname;
-        cell2.innerHTML = data.list[i].link_address;
-        // cell3.innerHTML = data[i].author;
-        // cell4.innerHTML = data[i].published_date;
+        let cell3 = row.insertCell(2);
+
+        cell1.innerHTML = i + 1;
+        cell2.innerHTML = data.list[i].nickname;
+        cell3.innerHTML = data.list[i].link_address;
       }
     }); // end of get
   });
