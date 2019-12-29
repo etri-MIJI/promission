@@ -39,7 +39,7 @@ vcMission.getInstructorKill(from),
   function(err, result) {
     if (err) console.log(err);
 
-    // let BJ = result[0].c.toString();
+    // let BJ = result[0];
     // let kill = result[1].c.toString();
     // let killAmount = result[2].c.toString();
     // console.log(' to: ', BJ);
@@ -55,7 +55,7 @@ vcMission.getInstructorRank(from),
   function(err, result) {
     if (err) console.log(err);
 
-    // let BJ = result[0].c.toString();
+    // let BJ = result[0];
     // let rank = result[1].c.toString();
     // let rankAmount = result[2].c.toString();
     // console.log(' to: ', BJ);
