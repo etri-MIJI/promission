@@ -419,12 +419,13 @@ module.exports = function (app) {
             }
             else {
                 // 회원가입 성공 시 토큰 전송
-                console.log("vc:", vc);
+                //console.log("vc:", vc);
                 //let token = web3.toWei(5, 'ether');
 
-                await contract.methods.transfer(m_wallet_address, 50000000000).send({ from: process.env.ADMIN_WALLET_ADDRESS, gas: 200000 }).on('receipt', function () {
-                    console.log('gggg');
-                });
+                // 추가
+                // await contract.methods.transfer(m_wallet_address, 50000000000).send({ from: process.env.ADMIN_WALLET_ADDRESS, gas: 200000 }).on('receipt', function () {
+                //     console.log('gggg');
+                // });
 
                 //vc.methods.transfer(m_wallet_address).call();
 
