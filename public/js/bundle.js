@@ -20,11 +20,11 @@ let abi =[
 				"type": "address"
 			},
 			{
-				"name": "_abovekill",
-				"type": "uint256"
+				"name": "_BJaddress",
+				"type": "address"
 			},
 			{
-				"name": "_perkill",
+				"name": "_Kill",
 				"type": "uint256"
 			},
 			{
@@ -43,6 +43,10 @@ let abi =[
 		"inputs": [
 			{
 				"name": "_address",
+				"type": "address"
+			},
+			{
+				"name": "_BJaddress",
 				"type": "address"
 			},
 			{
@@ -78,7 +82,7 @@ let abi =[
 		"outputs": [
 			{
 				"name": "",
-				"type": "uint256"
+				"type": "address"
 			},
 			{
 				"name": "",
@@ -103,6 +107,10 @@ let abi =[
 		],
 		"name": "getInstructorRank",
 		"outputs": [
+			{
+				"name": "",
+				"type": "address"
+			},
 			{
 				"name": "",
 				"type": "uint256"
@@ -150,6 +158,7 @@ let abi =[
 		"type": "function"
 	}
 ];
+
 console.log(abi);
 // const dataInput = document.querySelector('#dataInput');
 
@@ -183,6 +192,7 @@ function decode() {
 //   .replace(/(?:[\s\S]*MethodID: (.*)[\s\S])?[\s\S]?\[\d\]:(.*)/gi, '$1$2')
 //  console.log(data==inputData);
 let input_transaction=document.getElementById('dataInput').value;
+if(DEBUG) console.log(input_transaction);
 let transactionData = web3.eth.getTransaction(input_transaction);
 if(DEBUG) console.log(transactionData);
 let data=transactionData.input;
@@ -211,10 +221,16 @@ if(DEBUG)console.log(data);
   //   output.value = JSON.stringify(result, null, 2);
   // } catch(error) {
   // }
-  if(result.names[1]=="_rank"){
-    document.getElementById('mission_info').innerHTML="<label>미션 보낸 사람 계좌: "+result.inputs[0]+"</label><br>"+result.inputs[1].words[0]+"등 이내 달성 시<br>"+result.inputs[2].words[0]+"ETH 지급";
-  }else if(result.names[1]=="_kill"){
-    document.getElementById('mission_info').innerHTML="<label>미션 보낸 사람 계좌: "+result.inputs[0]+"</label><br>"+result.inputs[1].words[0]+"킬 이상 달성 시<br>"+result.inputs[2].words[0]+"ETH 지급";
+  console.log("result.inputs[2].words[0]:,",result.inputs[2].words[0]);
+  console.log("result.inputs[2].words[0]:,",result.inputs[3].words[0]);
+  console.log("result.inputs[2],",result.inputs[2]);
+  console.log("result.names[2]",result.names[2]);
+  console.log("result.names[2]",result.names[1]);
+
+  if(result.names[2]=="_Rank"){
+    document.getElementById('mission_info').innerHTML="<label>미션 보낸 사람 계좌: "+result.inputs[0]+"</label><br>"+result.inputs[2].words[0]+"등 이내 달성 시<br>"+result.inputs[3].words[0]+"ETH 지급";
+  }else if(result.names[2]=="_Kill"){
+    document.getElementById('mission_info').innerHTML="<label>미션 보낸 사람 계좌: "+result.inputs[0]+"</label><br>"+result.inputs[2].words[0]+"킬 이상 달성 시<br>"+result.inputs[3].words[0]+"ETH 지급";
   }
   
 
